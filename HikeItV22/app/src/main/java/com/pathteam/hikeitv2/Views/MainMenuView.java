@@ -39,12 +39,13 @@ public class MainMenuView extends RelativeLayout{
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.bind(this);
-
+// this is the animated background logic. we attach a variable to the resource in the view.
         final ImageView backgroundOne = (ImageView) findViewById(R.id.background_one);
         final ImageView backgroundTwo = (ImageView) findViewById(R.id.background_two);
 
         //Changes the direction the screen scrolls - Right to Left Scrolling
         final ValueAnimator animator = ValueAnimator.ofFloat(1.0f, 0.0f);
+        // we set this to go forever could be set to a number like 1 or 100
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setInterpolator(new LinearInterpolator());
 
@@ -53,6 +54,7 @@ public class MainMenuView extends RelativeLayout{
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
+                // the progress will update and we will use that number to changee the x position on the screen. 
                 final float progress = (float) animation.getAnimatedValue();
                 final float width = backgroundOne.getWidth();
                 final float translationX = width * progress;
