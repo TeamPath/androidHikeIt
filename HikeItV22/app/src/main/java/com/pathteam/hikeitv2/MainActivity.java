@@ -34,6 +34,8 @@ import flow.History;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static Integer position;
+
     String filename = "HikeHistoryFile";
     Gson gson = new Gson();
     public List<HikeList>  hikelist = new ArrayList<>();
@@ -98,9 +100,9 @@ public class MainActivity extends AppCompatActivity {
             readHikes(hikeFile);
         }else{
             // set up new hike info we will start with 3 hikes and each will have a set of markers.
-            hikelist.add(new HikeList("Fist Hike", new ArrayList<hMarker>(),"These are notes and stuff."));
-            hikelist.add(new HikeList("Second Hike", new ArrayList<hMarker>(),"These are notes and stuff."));
-            hikelist.add(new HikeList("Third Hike", new ArrayList<hMarker>(),"These are notes and stuff."));
+            hikelist.add(new HikeList("Paintsville Lake Trail", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space...."));
+            hikelist.add(new HikeList("Carter Caves Hike", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space...."));
+            hikelist.add(new HikeList("Cave Run Lake Trails", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space...."));
 //this adds a few points to each of our hikes in our list.
             hikelist.get(0).hmarker.add(new hMarker(1,setup1,new Date()));
             hikelist.get(0).hmarker.add(new hMarker(2,setup4,new Date()));
