@@ -7,10 +7,10 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pathteam.hikeitv2.HikeApplication;
 import com.pathteam.hikeitv2.R;
+import com.pathteam.hikeitv2.Stages.CaloriesBurnedStage;
 import com.pathteam.hikeitv2.Stages.HikeItMapStage;
 import com.pathteam.hikeitv2.Stages.HikeListStage;
 
@@ -106,6 +106,10 @@ public class MainMenuView extends RelativeLayout{
 
     @OnClick(R.id.my_stats)
     public void showStatsView(){
-        Toast.makeText(context, "Hike Weather View", Toast.LENGTH_SHORT).show();
+        Flow flow = HikeApplication.getMainFlow();
+        History newHistory = flow.getHistory().buildUpon()
+                .push(new CaloriesBurnedStage())
+                .build();
+        flow.setHistory(newHistory, Flow.Direction.FORWARD);
     }
 }

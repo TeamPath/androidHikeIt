@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.pathteam.hikeitv2.Views.CaloriesBurnedView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/calculateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="67dp"
+        android:layout_marginEnd="45dp"
+        android:text="Calculate" />
+    <EditText
+        android:id="@+id/selectedWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radioButton3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:hint="Current Weight(in pounds)"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/displayCaloriesBurned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/calculateButton"
+        android:layout_marginBottom="63dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp" />
+    <EditText
+        android:id="@+id/durationOfHike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Duration of Hike"
+        android:inputType="numberDecimal"
+        android:layout_below="@+id/selectedWeight"
+        android:layout_alignStart="@+id/selectedWeight" />
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup"
+        android:layout_above="@+id/displayCaloriesBurned"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="60dp">
+        <RadioButton
+            android:id="@+id/lightButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Light"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="20dp"/>
+        <RadioButton
+            android:id="@+id/moderateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moderate"
+            android:layout_marginStart="50dp"/>
+        <RadioButton
+            android:id="@+id/intenseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Intense"
+            android:layout_marginStart="50dp"/>
+    </RadioGroup>
+</com.pathteam.hikeitv2.Views.CaloriesBurnedView>
