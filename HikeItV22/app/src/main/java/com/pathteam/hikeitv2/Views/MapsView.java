@@ -105,6 +105,7 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         mMap.setOnMyLocationChangeListener(myLocationChangeListener);
         UiSettings UiSettings = mMap.getUiSettings();
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
