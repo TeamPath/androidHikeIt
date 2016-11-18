@@ -34,10 +34,13 @@ import flow.History;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static Integer position;
+
     String filename = "HikeHistoryFile";
     Gson gson = new Gson();
     public List<HikeList>  hikelist = new ArrayList<>();
     private ArrayList<Object>allItems = new ArrayList<>();
+    // these are the basic lat longs that are used to set up first run save file. We don't want an empty
     LatLng setup1 = new LatLng(37.816,-82.809);
     LatLng setup2 = new LatLng(37.818,-82.810);
     LatLng setup3 = new LatLng(37.820,-82.811);
@@ -62,8 +65,9 @@ public class MainActivity extends AppCompatActivity {
         flow = HikeApplication.getMainFlow();
         dispatcher=new ScreenplayDispatcher(this, container);
         dispatcher.setUp(flow);
-
+//Get ready for our json save file.
         gson = new Gson();
+        // lets go get our saved hikes!
         setupHikes();
 
         if (Build.VERSION.SDK_INT >= 23){
@@ -96,10 +100,10 @@ public class MainActivity extends AppCompatActivity {
             readHikes(hikeFile);
         }else{
             // set up new hike info we will start with 3 hikes and each will have a set of markers.
-            hikelist.add(new HikeList("Fist Hike", new ArrayList<hMarker>(),"These are notes and stuff."));
-            hikelist.add(new HikeList("Second Hike", new ArrayList<hMarker>(),"These are notes and stuff."));
-            hikelist.add(new HikeList("Third Hike", new ArrayList<hMarker>(),"These are notes and stuff."));
-
+            hikelist.add(new HikeList("Paintsville Lake Trail", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space...."));
+            hikelist.add(new HikeList("Carter Caves Hike", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space...."));
+            hikelist.add(new HikeList("Cave Run Lake Trails", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space...."));
+//this adds a few points to each of our hikes in our list.
             hikelist.get(0).hmarker.add(new hMarker(1,setup1,new Date()));
             hikelist.get(0).hmarker.add(new hMarker(2,setup4,new Date()));
             hikelist.get(1).hmarker.add(new hMarker(1,setup2,new Date()));

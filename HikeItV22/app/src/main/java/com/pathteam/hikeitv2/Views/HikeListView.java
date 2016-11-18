@@ -49,9 +49,12 @@ public class HikeListView extends LinearLayout {
 
     private void listHikes(){
 
+        //This line gives us access to the Arraylist located in the main activity
+        //Will contain all the information related to our hikes
         hikeAdapter.hikelist = new ArrayList<>(((MainActivity)context).hikelist);
 
         for (HikeList list : hikeAdapter.hikelist) {
+
             hikeAdapter.notifyDataSetChanged();
         }
     }
