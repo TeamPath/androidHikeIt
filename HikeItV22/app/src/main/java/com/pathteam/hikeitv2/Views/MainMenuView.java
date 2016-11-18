@@ -54,7 +54,7 @@ public class MainMenuView extends RelativeLayout{
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                // the progress will update and we will use that number to changee the x position on the screen. 
+                // the progress will update and we will use that number to changee the x position on the screen.
                 final float progress = (float) animation.getAnimatedValue();
                 final float width = backgroundOne.getWidth();
                 final float translationX = width * progress;
@@ -62,6 +62,7 @@ public class MainMenuView extends RelativeLayout{
                 backgroundTwo.setTranslationX(translationX - width);
             }
         });
+// This starts the background image
 
         animator.start();
         final ImageView overlayOne = (ImageView) findViewById(R.id.cloud_one);
