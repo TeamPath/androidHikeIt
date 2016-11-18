@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.pathteam.hikeitv2.MainActivity;
 import com.pathteam.hikeitv2.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -48,17 +49,22 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
     private double lng = 0;
     public String name;
     public String id;
-    Date date = new Date();
+   // Date date = new Date();
     Location oldLocation = new Location("none");
     Location newLocation = new Location("newLocation");
     float distance = 0;
     float totalDis = 0;
     LatLng oldcoord;
+    double value;
 
     Handler handler = new Handler();
 
     @Bind(map)
     MapView mapView;
+
+    java.util.Date date = new java.util.Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    //System.out.println(sdf.format(date));
 
     public ArrayList<String> markers = new ArrayList<>();
 
@@ -92,7 +98,9 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 Log.d("@@@@@@@", "Hello");
                 markers.add(markerNum);
                 markers.add(Home.toString());
-                markers.add(date.toString());
+                markers.add(sdf.format(date).toString());
+                //System.out.println(sdf.format(date));
+               // markers.add(sdf.format(date).toString());
 
                 for (String marker : markers) {
                     Log.i("@@MARKER@@: ", marker);
@@ -173,15 +181,23 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 }
                 oldcoord = Home;
                 date = new Date();
+                //System.out.println(sdf.format(date));
+
                 //This measures from point to point on the polyline, converts it to miles
                 distance = oldLocation.distanceTo(newLocation) / 1609;
+
                 // oldLocation is the location you were at last onChange
                 oldLocation.setLatitude(lat);
                 oldLocation.setLongitude(lng);
+
+                // adds the total distance of your Hike
+                totalDis = totalDis + distance;
+                String trip = String.valueOf(totalDis);
+                value = Double.parseDouble(trip);
+                value = Math.round(totalDis * 100.0)/100.0;
+                Log.d("*******", String.valueOf(value));
             }
-            // adds the total distance of your Hike
-            totalDis = totalDis + distance;
-            Log.d("*******", String.valueOf(totalDis));
+
         }
     };
 
