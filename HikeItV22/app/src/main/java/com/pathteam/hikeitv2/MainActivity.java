@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     Gson gson = new Gson();
     public List<HikeList>  hikelist = new ArrayList<>();
     private ArrayList<Object>allItems = new ArrayList<>();
+    // these are the basic lat longs that are used to set up first run save file. We don't want an empty 
     LatLng setup1 = new LatLng(37.816,-82.809);
     LatLng setup2 = new LatLng(37.818,-82.810);
     LatLng setup3 = new LatLng(37.820,-82.811);

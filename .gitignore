@@ -33,3 +33,5 @@ captures/
 *.jks
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
+
+HikeItV22/.idea/misc.xml
