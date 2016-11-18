@@ -21,6 +21,7 @@ import butterknife.OnClick;
 public class CaloriesBurnedView extends RelativeLayout {
     Double MET;
     Double totalCaloriesBurned;
+
     @Bind(R.id.selectedWeight)
     EditText selectedWeight;
     @Bind(R.id.durationOfHike)
@@ -55,9 +56,12 @@ public class CaloriesBurnedView extends RelativeLayout {
         }
         String Time = durationOfHike.getText().toString();
         Double totalTime = Double.parseDouble(Time);
+
         String weight = selectedWeight.getText().toString();
         Double totalWeight = Double.parseDouble(weight);
+
         totalCaloriesBurned = ((totalTime*60) *(MET *(totalWeight/2.2)))/200;
+        totalCaloriesBurned = Math.round(totalCaloriesBurned *100.0)/100.0;
         return totalCaloriesBurned;
     }
     @OnClick(R.id.calculateButton)
