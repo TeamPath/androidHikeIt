@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.pathteam.hikeitv2.MainActivity;
+import com.pathteam.hikeitv2.Model.hMarker;
 import com.pathteam.hikeitv2.R;
 
 import java.text.SimpleDateFormat;
@@ -62,11 +63,15 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
     @Bind(map)
     MapView mapView;
 
+<<<<<<< HEAD
     java.util.Date date = new java.util.Date();
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     //System.out.println(sdf.format(date));
 
     public ArrayList<String> markers = new ArrayList<>();
+=======
+    public ArrayList<hMarker> markers = new ArrayList<>();
+>>>>>>> master
 
     public MapsView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -82,12 +87,13 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
         mapView.onResume();
     }
 
-    //This is the timer for dropping markers
+    //This is the timer for dropping markers-- Alex edit of marker arrays
     int i = 0;
     final Runnable r = new Runnable() {
         public void run() {
             i = i + 1;
-            String markerNum = String.valueOf(i);
+
+            Integer markerNum = i;
             if (Home != null) {
                 mMap.addMarker(new MarkerOptions()
                         .snippet("Marker: " + markerNum)
@@ -96,15 +102,23 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                         .title(date.toString())
                         .position(Home));
                 Log.d("@@@@@@@", "Hello");
+<<<<<<< HEAD
                 markers.add(markerNum);
                 markers.add(Home.toString());
                 markers.add(sdf.format(date).toString());
                 //System.out.println(sdf.format(date));
                // markers.add(sdf.format(date).toString());
+=======
+                hMarker currentMarker = new hMarker(markerNum, Home, date);
+                markers.add(currentMarker);
+>>>>>>> master
 
-                for (String marker : markers) {
-                    Log.i("@@MARKER@@: ", marker);
+                for (int x = 0; x < markers.size(); x++) {
+                    Log.i("@@MARKER@@: ", markers.get(x).getMarkerId().toString());
+                    Log.i("@@MARKER@@: ", markers.get(x).getDate().toString());
+                    Log.i("@@MARKER@@: ", markers.get(x).getMarkerPos().toString());
                 }
+
             }
             handler.postDelayed(this, 30000);
         }
