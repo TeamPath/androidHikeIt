@@ -7,10 +7,10 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pathteam.hikeitv2.HikeApplication;
 import com.pathteam.hikeitv2.R;
+import com.pathteam.hikeitv2.Stages.CaloriesBurnedStage;
 import com.pathteam.hikeitv2.Stages.HikeItMapStage;
 import com.pathteam.hikeitv2.Stages.HikeListStage;
 
@@ -39,12 +39,13 @@ public class MainMenuView extends RelativeLayout{
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.bind(this);
-
+// this is the animated background logic. we attach a variable to the resource in the view.
         final ImageView backgroundOne = (ImageView) findViewById(R.id.background_one);
         final ImageView backgroundTwo = (ImageView) findViewById(R.id.background_two);
 
         //Changes the direction the screen scrolls - Right to Left Scrolling
         final ValueAnimator animator = ValueAnimator.ofFloat(1.0f, 0.0f);
+        // we set this to go forever could be set to a number like 1 or 100
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setInterpolator(new LinearInterpolator());
 
@@ -53,6 +54,7 @@ public class MainMenuView extends RelativeLayout{
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
+                // the progress will update and we will use that number to changee the x position on the screen. 
                 final float progress = (float) animation.getAnimatedValue();
                 final float width = backgroundOne.getWidth();
                 final float translationX = width * progress;
@@ -103,6 +105,10 @@ public class MainMenuView extends RelativeLayout{
 
     @OnClick(R.id.my_stats)
     public void showStatsView(){
-        Toast.makeText(context, "Hike Weather View", Toast.LENGTH_SHORT).show();
+        Flow flow = HikeApplication.getMainFlow();
+        History newHistory = flow.getHistory().buildUpon()
+                .push(new CaloriesBurnedStage())
+                .build();
+        flow.setHistory(newHistory, Flow.Direction.FORWARD);
     }
 }
