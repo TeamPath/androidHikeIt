@@ -54,7 +54,6 @@ public class HikeListView extends LinearLayout {
         hikeAdapter.hikelist = new ArrayList<>(((MainActivity)context).hikelist);
 
         for (HikeList list : hikeAdapter.hikelist) {
-
             hikeAdapter.notifyDataSetChanged();
         }
     }
