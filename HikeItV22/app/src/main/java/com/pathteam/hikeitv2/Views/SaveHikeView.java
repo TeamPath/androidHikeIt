@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.pathteam.hikeitv2.MainActivity;
 import com.pathteam.hikeitv2.Model.MarkerLoadedEvent;
 import com.pathteam.hikeitv2.Model.hMarker;
 import com.pathteam.hikeitv2.R;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by jeremiahlewis on 11/18/16.
@@ -73,4 +75,10 @@ public class SaveHikeView extends RelativeLayout {
         EventBus.getDefault().unregister(this);
         super.onDetachedFromWindow();
     }
+
+    @OnClick(R.id.pick_photo_button)
+    public void getPic() {
+        ((MainActivity) getContext()).getImage();
+    }
+
 }
