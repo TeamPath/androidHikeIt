@@ -22,8 +22,6 @@
         android:src="@drawable/startbutton"
         android:clickable="true"
         android:visibility="visible"
-
-
         />
 
     <android.support.design.widget.FloatingActionButton
