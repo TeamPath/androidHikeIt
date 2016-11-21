@@ -12,10 +12,10 @@ public class Splashscreen extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
+        // im not sure we need to save this, but leave it for now.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
-
+// This runns for 3 sec then sends you to the main activity. 
         Thread timerThread = new Thread(){
             public void run(){
                 try{
@@ -33,7 +33,7 @@ public class Splashscreen extends Activity {
 
     @Override
     protected void onPause() {
-        // TODO Auto-generated method stub
+        // lets us click out of the screen and pause the app
         super.onPause();
         finish();
     }
