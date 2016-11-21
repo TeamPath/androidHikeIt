@@ -243,14 +243,13 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
 
     }
 
-
     @OnClick(R.id.camera_button)
    public void startCamera() {
        //MainActivity.openCamera();
         ((MainActivity) getContext()).openCamera();
 
     }
-   }
+}
 
 
 
