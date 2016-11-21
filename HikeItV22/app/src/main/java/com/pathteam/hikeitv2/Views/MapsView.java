@@ -229,9 +229,11 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
         }
     }
 
-    //StartButton
+    //StopButton
     @OnClick(R.id.stop_button)
     public void saveHike() {
+
+        handler.removeCallbacks(r);
 
         EventBus.getDefault().post(new MarkerLoadedEvent(markers));
 
