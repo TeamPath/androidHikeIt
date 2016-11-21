@@ -3,6 +3,7 @@ package com.pathteam.hikeitv2.Views;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,14 +16,18 @@ import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.pathteam.hikeitv2.MainActivity;
 import com.pathteam.hikeitv2.Model.HikeList;
+import com.pathteam.hikeitv2.Model.hMarker;
 import com.pathteam.hikeitv2.R;
 
 import java.util.ArrayList;
@@ -41,6 +46,8 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnMarkerClickListener, GoogleMap.OnMyLocationButtonClickListener {
 
+    private Integer i;
+
     private GoogleMap mMap;
     public LatLng Home;
     private double lat = 0;
@@ -55,6 +62,8 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
 
     private Context context;
+
+    private ArrayList<hMarker> markers;
 
     public HikeList hike;
     public List<HikeList> hikelist;
@@ -94,8 +103,10 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
         mapView.onResume();
 
         hike = hikelist.get(position);
-        title.setText(hike.getTitle());
+        markers = hike.hmarker;
 
+        title.setText(hike.getTitle());
+        i = 0;
 
     }
 
@@ -126,6 +137,7 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        LatLng first;
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         UiSettings UiSettings = mMap.getUiSettings();
@@ -135,6 +147,34 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
         }
         mMap.setMyLocationEnabled(true);
+<<<<<<< HEAD
        // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Home, 18));
+=======
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers.get(0).getMarkerPos(), 18));
+
+        for(hMarker marker : markers) {
+            mMap.addMarker(new MarkerOptions().position(marker.getMarkerPos()));
+            Home = marker.getMarkerPos();
+
+
+            if(i >= 1) {
+                mMap.addPolyline((new PolylineOptions())
+                        .add(Home, oldcoord)
+                        .color(Color.RED)
+                        .width(25));
+            }
+            i++;
+            oldcoord = marker.getMarkerPos();
+        }
+
+
+
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+>>>>>>> master
     }
 }
