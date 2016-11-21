@@ -26,6 +26,7 @@ import static com.pathteam.hikeitv2.MainActivity.position;
  */
 
 public class HikeListAdapter extends RecyclerView.Adapter<HikeListAdapter.HikeHolder> {
+
     public List<HikeList> hikelist;
     private Context context;
 
@@ -33,26 +34,36 @@ public class HikeListAdapter extends RecyclerView.Adapter<HikeListAdapter.HikeHo
         this.hikelist = hikelist;
         this.context = context;
     }
+
     @Override
     public HikeListAdapter.HikeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflateView = LayoutInflater.from(context).inflate(R.layout.hike_list_item_view, parent, false);
         return new HikeListAdapter.HikeHolder(inflateView);
     }
+
     @Override
     public void onBindViewHolder(HikeListAdapter.HikeHolder holder, int position) {
+
         HikeList hikes = hikelist.get(position);
-        holder.bindUser(hikes);
+
+        if (position % 2 == 0 || position == 0){
+            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryDark));
+        }else{
+            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+        }
+
+        holder.bindHikes(hikes);
     }
+
     @Override
     public int getItemCount() {
         return hikelist.size();
-//        return hikelist == null ? 0 : hikelist.size();
     }
 
     class HikeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @Bind(R.id.hike_notes)
-        TextView nearbyUsername;
+        TextView hikeNotes;
 
         @Bind(R.id.title)
         TextView title;
@@ -64,9 +75,11 @@ public class HikeListAdapter extends RecyclerView.Adapter<HikeListAdapter.HikeHo
         }
 
         //        Lets put our data in our UI
-        public void bindUser(final HikeList hikes) {
-            nearbyUsername.setText(hikes.getHikenotes());
+        public void bindHikes(final HikeList hikes) {
+
+            hikeNotes.setText(hikes.getHikenotes());
             title.setText(hikes.getTitle());
+
         }
 
         //On Click for List Hike View items
