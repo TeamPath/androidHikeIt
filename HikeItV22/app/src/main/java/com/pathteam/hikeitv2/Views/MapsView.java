@@ -25,16 +25,24 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.pathteam.hikeitv2.HikeApplication;
 import com.pathteam.hikeitv2.MainActivity;
+import com.pathteam.hikeitv2.Model.MarkerLoadedEvent;
 import com.pathteam.hikeitv2.Model.hMarker;
 import com.pathteam.hikeitv2.R;
+import com.pathteam.hikeitv2.Stages.SaveHikeStage;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import flow.Flow;
+import flow.History;
 
 import static com.pathteam.hikeitv2.R.id.map;
 
@@ -49,19 +57,28 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
     private double lng = 0;
     public String name;
     public String id;
-    Date date = new Date();
+   // Date date = new Date();
     Location oldLocation = new Location("none");
     Location newLocation = new Location("newLocation");
     float distance = 0;
     float totalDis = 0;
     LatLng oldcoord;
+    double value;
 
     Handler handler = new Handler();
 
     @Bind(map)
     MapView mapView;
 
+
+    java.util.Date date = new java.util.Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+    //System.out.println(sdf.format(date));
+
+
+
     public ArrayList<hMarker> markers = new ArrayList<>();
+
 
     public MapsView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -86,14 +103,20 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
             Integer markerNum = i;
             if (Home != null) {
                 mMap.addMarker(new MarkerOptions()
-                        .snippet("Marker: " + markerNum)
+                        .snippet("Marker: " + markerNum+", "+"Miles :"+ value)
+
                         .zIndex(i)
                         .draggable(true)
-                        .title(date.toString())
+                        .title("TIME: "+sdf.format(date).toString())
                         .position(Home));
                 Log.d("@@@@@@@", "Hello");
+
+                //System.out.println(sdf.format(date));
+               // markers.add(sdf.format(date).toString());
+
                 hMarker currentMarker = new hMarker(markerNum, Home, date);
                 markers.add(currentMarker);
+
 
                 for (int x = 0; x < markers.size(); x++) {
                     Log.i("@@MARKER@@: ", markers.get(x).getMarkerId().toString());
@@ -177,15 +200,23 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 }
                 oldcoord = Home;
                 date = new Date();
+                //System.out.println(sdf.format(date));
+
                 //This measures from point to point on the polyline, converts it to miles
                 distance = oldLocation.distanceTo(newLocation) / 1609;
+
                 // oldLocation is the location you were at last onChange
                 oldLocation.setLatitude(lat);
                 oldLocation.setLongitude(lng);
+
+                // adds the total distance of your Hike
+                totalDis = totalDis + distance;
+                String trip = String.valueOf(totalDis);
+                value = Double.parseDouble(trip);
+                value = Math.round(totalDis * 1000.0)/1000.0;
+                Log.d("*******", String.valueOf(value));
             }
-            // adds the total distance of your Hike
-            totalDis = totalDis + distance;
-            Log.d("*******", String.valueOf(totalDis));
+
         }
     };
 
@@ -197,7 +228,29 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
             handler.postDelayed(r, 100);
         }
     }
-}
+
+    //StartButton
+    @OnClick(R.id.stop_button)
+    public void saveHike() {
+
+        EventBus.getDefault().post(new MarkerLoadedEvent(markers));
+
+        Flow flow = HikeApplication.getMainFlow();
+        History newHistory = flow.getHistory().buildUpon()
+                .push(new SaveHikeStage())
+                .build();
+        flow.setHistory(newHistory, Flow.Direction.FORWARD);
+
+    }
+
+
+    @OnClick(R.id.camera_button)
+   public void startCamera() {
+       //MainActivity.openCamera();
+        ((MainActivity) getContext()).openCamera();
+
+    }
+   }
 
 
 

@@ -112,4 +112,5 @@ public class MainMenuView extends RelativeLayout{
                 .build();
         flow.setHistory(newHistory, Flow.Direction.FORWARD);
     }
+
 }

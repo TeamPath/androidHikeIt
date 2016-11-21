@@ -7,7 +7,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.pathteam.hikeitv2.Model.MarkerLoadedEvent;
 import com.pathteam.hikeitv2.R;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,6 +21,7 @@ import butterknife.ButterKnife;
  */
 
 public class SaveHikeView extends RelativeLayout {
+
     private Context context;
 
     @Bind(R.id.saveButton)
@@ -38,11 +43,16 @@ public class SaveHikeView extends RelativeLayout {
         super(context, attrs);
         this.context = context;
     }
+
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.bind(this);
+
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void loadMarkers(MarkerLoadedEvent event){
 
+    }
 }
