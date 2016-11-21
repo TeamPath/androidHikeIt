@@ -25,9 +25,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.pathteam.hikeitv2.HikeApplication;
 import com.pathteam.hikeitv2.MainActivity;
+import com.pathteam.hikeitv2.Model.MarkerLoadedEvent;
 import com.pathteam.hikeitv2.Model.hMarker;
 import com.pathteam.hikeitv2.R;
+import com.pathteam.hikeitv2.Stages.SaveHikeStage;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +41,8 @@ import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import flow.Flow;
+import flow.History;
 
 import static com.pathteam.hikeitv2.R.id.map;
 
@@ -223,14 +230,30 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
             handler.postDelayed(r, 100);
         }
     }
+
+    //StopButton
+    @OnClick(R.id.stop_button)
+    public void saveHike() {
+
+        handler.removeCallbacks(r);
+
+        EventBus.getDefault().post(new MarkerLoadedEvent(markers));
+
+        Flow flow = HikeApplication.getMainFlow();
+        History newHistory = flow.getHistory().buildUpon()
+                .push(new SaveHikeStage())
+                .build();
+        flow.setHistory(newHistory, Flow.Direction.FORWARD);
+
+    }
+
     @OnClick(R.id.camera_button)
    public void startCamera() {
        //MainActivity.openCamera();
         ((MainActivity) getContext()).openCamera();
 
     }
-   }
-
+}
 
 
 
