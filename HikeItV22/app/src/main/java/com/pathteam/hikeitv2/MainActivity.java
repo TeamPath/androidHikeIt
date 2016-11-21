@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
                                 MY_PERMISSIONS_REQUEST_CAMERA);
                     }
                 });
-        alertDialog.show();
+        //alertDialog.show();
     }
 
     private void showSettingsAlert() {
@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        alertDialog.show();
+       // alertDialog.show();
     }
 
     @Override
@@ -309,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
                                         this, permission);
 
                         if (showRationale) {
-                            showAlert();
+                           // showAlert();
                         } else if (!showRationale) {
                             // user denied flagging NEVER ASK AGAIN
                             // you can either enable some fall back,
@@ -352,9 +352,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         startActivity(intent);
     }
-//    @OnClick(R.id.camera_button)
-//    public void startCamera() {
-//        openCamera();
-//    }
 
 }
