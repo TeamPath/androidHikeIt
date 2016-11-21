@@ -2,11 +2,15 @@ package com.pathteam.hikeitv2.Views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.pathteam.hikeitv2.Components.Constants;
+import com.pathteam.hikeitv2.Components.Utils;
+import com.pathteam.hikeitv2.MainActivity;
 import com.pathteam.hikeitv2.Model.HikeList;
 import com.pathteam.hikeitv2.R;
 
@@ -14,6 +18,8 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 /**
  * Created by jeremiahlewis on 11/18/16.
@@ -52,6 +58,13 @@ public class SaveHikeView extends RelativeLayout {
 
         super.onFinishInflate();
         ButterKnife.bind(this);
+       // EventBus.getDefault().register(this);
+
+        for (int x = 0; x < Constants.markersArray.size(); x++) {
+            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getMarkerId().toString());
+            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getDate().toString());
+            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getMarkerPos().toString());
+        }
 
     }
 
@@ -59,6 +72,22 @@ public class SaveHikeView extends RelativeLayout {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
     }
+
+
+    @OnClick(R.id.pick_photo_button)
+    public void getPic() {
+        ((MainActivity) getContext()).getImage();
+
+    }
+    @OnClick(R.id.saveButton)
+    public void save() {
+        ((MainActivity) getContext()).hikelist.add(new HikeList("Mayo Lake Trail", Constants.markersArray,"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....",Utils.encodeTobase64(Constants.me)));
+        if (Constants.me != null) {
+            Log.d("PIC", Utils.encodeTobase64(Constants.me));
+        }
+    }
+
+
 
 
 }

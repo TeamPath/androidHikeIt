@@ -144,8 +144,12 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
         }
         mMap.setMyLocationEnabled(true);
+<<<<<<< HEAD
+       // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Home, 18));
+=======
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers.get(0).getMarkerPos(), 18));
 
@@ -171,5 +175,6 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+>>>>>>> master
     }
 }
