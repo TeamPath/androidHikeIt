@@ -27,12 +27,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.pathteam.hikeitv2.HikeApplication;
 import com.pathteam.hikeitv2.MainActivity;
-import com.pathteam.hikeitv2.Model.MarkerLoadedEvent;
 import com.pathteam.hikeitv2.Model.hMarker;
 import com.pathteam.hikeitv2.R;
 import com.pathteam.hikeitv2.Stages.SaveHikeStage;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -235,8 +232,6 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
 
         handler.removeCallbacks(r);
 
-        EventBus.getDefault().post(new MarkerLoadedEvent(markers));
-
         Flow flow = HikeApplication.getMainFlow();
         History newHistory = flow.getHistory().buildUpon()
                 .push(new SaveHikeStage())
@@ -244,6 +239,7 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
         flow.setHistory(newHistory, Flow.Direction.FORWARD);
 
     }
+
 
     @OnClick(R.id.camera_button)
    public void startCamera() {

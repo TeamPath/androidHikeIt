@@ -77,7 +77,7 @@ public class HikeListAdapter extends RecyclerView.Adapter<HikeListAdapter.HikeHo
         //        Lets put our data in our UI
         public void bindHikes(final HikeList hikes) {
 
-            hikeNotes.setText(hikes.getHikenotes());
+            hikeNotes.setText(hikes.getHikeNotes());
             title.setText(hikes.getTitle());
 
         }

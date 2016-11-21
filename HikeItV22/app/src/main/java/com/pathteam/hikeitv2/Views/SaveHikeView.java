@@ -2,19 +2,13 @@ package com.pathteam.hikeitv2.Views;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.pathteam.hikeitv2.Model.MarkerLoadedEvent;
-import com.pathteam.hikeitv2.Model.hMarker;
+import com.pathteam.hikeitv2.Model.HikeList;
 import com.pathteam.hikeitv2.R;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -28,7 +22,9 @@ import butterknife.ButterKnife;
 public class SaveHikeView extends RelativeLayout {
 
     private Context context;
-    private ArrayList <hMarker> loadedMarkers;
+
+    public ArrayList <HikeList> currentHike = new ArrayList<>();
+
 
     @Bind(R.id.saveButton)
     Button saveButton;
@@ -53,24 +49,24 @@ public class SaveHikeView extends RelativeLayout {
 
     @Override
     protected void onFinishInflate() {
+
         super.onFinishInflate();
         ButterKnife.bind(this);
-        EventBus.getDefault().register(this);
-    }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void loadMarkers(MarkerLoadedEvent event){
-        loadedMarkers = event.markers;
-        for (int x = 0; x < loadedMarkers.size(); x++) {
-            Log.i("@@EVENT BUS MARKER@@: ", loadedMarkers.get(x).getMarkerId().toString());
-            Log.i("@@EVENT BUS MARKER@@: ", loadedMarkers.get(x).getDate().toString());
-            Log.i("@@EVENT BUS MARKER@@: ", loadedMarkers.get(x).getMarkerPos().toString());
-        }
+//        ((MapsView)context.)
+//
+//        for (int x = 0; x < markerHolder.size(); x++) {
+//            Log.i("@@EVENT BUS MARKER@@: ", markerHolder.get(x).getMarkerId().toString());
+//            Log.i("@@EVENT BUS MARKER@@: ", markerHolder.get(x).getDate().toString());
+//            Log.i("@@EVENT BUS MARKER@@: ", markerHolder.get(x).getMarkerPos().toString());
+//        }
+
     }
 
     @Override
     protected void onDetachedFromWindow() {
-        EventBus.getDefault().unregister(this);
         super.onDetachedFromWindow();
     }
+
+
 }
