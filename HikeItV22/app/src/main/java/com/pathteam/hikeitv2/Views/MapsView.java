@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.pathteam.hikeitv2.Components.Constants;
 import com.pathteam.hikeitv2.HikeApplication;
 import com.pathteam.hikeitv2.MainActivity;
 import com.pathteam.hikeitv2.Model.hMarker;
@@ -122,7 +123,7 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 }
 
             }
-            handler.postDelayed(this, 30000);
+            handler.postDelayed(this, 15000);
         }
     };
 
@@ -217,6 +218,10 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
         }
     };
 
+
+
+
+
     //StartButton
     @OnClick(R.id.start_button)
     public void startHike() {
@@ -231,12 +236,14 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
     public void saveHike() {
 
         handler.removeCallbacks(r);
+        Constants.markersArray=markers;
 
         Flow flow = HikeApplication.getMainFlow();
         History newHistory = flow.getHistory().buildUpon()
                 .push(new SaveHikeStage())
                 .build();
         flow.setHistory(newHistory, Flow.Direction.FORWARD);
+
 
     }
 
