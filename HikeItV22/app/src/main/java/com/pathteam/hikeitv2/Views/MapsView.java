@@ -25,9 +25,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.pathteam.hikeitv2.HikeApplication;
 import com.pathteam.hikeitv2.MainActivity;
+import com.pathteam.hikeitv2.Model.MarkerLoadedEvent;
 import com.pathteam.hikeitv2.Model.hMarker;
 import com.pathteam.hikeitv2.R;
+import com.pathteam.hikeitv2.Stages.SaveHikeStage;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,6 +40,8 @@ import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import flow.Flow;
+import flow.History;
 
 import static com.pathteam.hikeitv2.R.id.map;
 
@@ -94,6 +101,7 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 Log.d("@@@@@@@", "Hello");
                 hMarker currentMarker = new hMarker(markerNum, Home, date);
                 markers.add(currentMarker);
+
 
                 for (int x = 0; x < markers.size(); x++) {
                     Log.i("@@MARKER@@: ", markers.get(x).getMarkerId().toString());
@@ -197,6 +205,21 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
             handler.postDelayed(r, 100);
         }
     }
+
+    //StartButton
+    @OnClick(R.id.stop_button)
+    public void saveHike() {
+
+        EventBus.getDefault().post(new MarkerLoadedEvent(markers));
+
+        Flow flow = HikeApplication.getMainFlow();
+        History newHistory = flow.getHistory().buildUpon()
+                .push(new SaveHikeStage())
+                .build();
+        flow.setHistory(newHistory, Flow.Direction.FORWARD);
+
+    }
+
 }
 
 
