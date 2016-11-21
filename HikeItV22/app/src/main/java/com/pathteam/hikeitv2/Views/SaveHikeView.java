@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.pathteam.hikeitv2.Model.MarkerLoadedEvent;
@@ -26,14 +27,17 @@ public class SaveHikeView extends RelativeLayout {
     @Bind(R.id.saveButton)
     Button saveButton;
 
-    @Bind(R.id.backButton)
-    Button backButton;
+    @Bind(R.id.pick_photo_button)
+    Button choosePhoto;
 
     @Bind(R.id.hike_title)
     EditText hikeTitle;
 
     @Bind(R.id.hike_notes)
     EditText hikeNotes;
+
+    @Bind(R.id.galleryPicture)
+    ImageView galleryPicture;
 
     public SaveHikeView(Context context, AttributeSet attrs) {
         super(context, attrs);
