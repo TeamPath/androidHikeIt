@@ -33,7 +33,6 @@ public class HikeListAdapter extends RecyclerView.Adapter<HikeListAdapter.HikeHo
         this.hikelist = hikelist;
         this.context = context;
     }
-
     @Override
     public HikeListAdapter.HikeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflateView = LayoutInflater.from(context).inflate(R.layout.hike_list_item_view, parent, false);

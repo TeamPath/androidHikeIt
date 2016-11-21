@@ -63,15 +63,15 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
     @Bind(map)
     MapView mapView;
 
-<<<<<<< HEAD
+
     java.util.Date date = new java.util.Date();
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     //System.out.println(sdf.format(date));
 
-    public ArrayList<String> markers = new ArrayList<>();
-=======
+
+
     public ArrayList<hMarker> markers = new ArrayList<>();
->>>>>>> master
+
 
     public MapsView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -96,22 +96,20 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
             Integer markerNum = i;
             if (Home != null) {
                 mMap.addMarker(new MarkerOptions()
-                        .snippet("Marker: " + markerNum)
+                        .snippet("Marker: " + markerNum+", "+"Miles :"+ value)
+
                         .zIndex(i)
                         .draggable(true)
-                        .title(date.toString())
+                        .title("TIME: "+sdf.format(date).toString())
                         .position(Home));
                 Log.d("@@@@@@@", "Hello");
-<<<<<<< HEAD
-                markers.add(markerNum);
-                markers.add(Home.toString());
-                markers.add(sdf.format(date).toString());
+
                 //System.out.println(sdf.format(date));
                // markers.add(sdf.format(date).toString());
-=======
+
                 hMarker currentMarker = new hMarker(markerNum, Home, date);
                 markers.add(currentMarker);
->>>>>>> master
+
 
                 for (int x = 0; x < markers.size(); x++) {
                     Log.i("@@MARKER@@: ", markers.get(x).getMarkerId().toString());
@@ -208,7 +206,7 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 totalDis = totalDis + distance;
                 String trip = String.valueOf(totalDis);
                 value = Double.parseDouble(trip);
-                value = Math.round(totalDis * 100.0)/100.0;
+                value = Math.round(totalDis * 1000.0)/1000.0;
                 Log.d("*******", String.valueOf(value));
             }
 
@@ -223,7 +221,14 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
             handler.postDelayed(r, 100);
         }
     }
-}
+    @OnClick(R.id.camera_button)
+   public void startCamera() {
+       //MainActivity.openCamera();
+        ((MainActivity) getContext()).openCamera();
+
+    }
+   }
+
 
 
 
