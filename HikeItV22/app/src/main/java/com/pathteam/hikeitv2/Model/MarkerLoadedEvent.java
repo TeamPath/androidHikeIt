@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class MarkerLoadedEvent {
 
-    public ArrayList<hMarker> markers = new ArrayList<>();
+    public ArrayList<hMarker> markers;
 
     public MarkerLoadedEvent(ArrayList<hMarker> markers) {
         this.markers = markers;

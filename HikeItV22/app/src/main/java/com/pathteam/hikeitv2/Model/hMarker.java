@@ -10,6 +10,7 @@ import java.util.Date;
  */
 // this is the marker object we can add to this if need be.
 public class hMarker {
+
     @SerializedName("markerId")
     private Integer markerId;
 

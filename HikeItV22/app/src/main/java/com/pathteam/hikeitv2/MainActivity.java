@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < listsize; i++){
             Log.d("!!!!!", hikelist.get(i).getTitle());
-            Log.d("!!!!!", hikelist.get(i).getHikenotes());
+            Log.d("!!!!!", hikelist.get(i).getHikeNotes());
             Log.d("!!!!!", hikelist.get(i).hmarker.get(0).getDate().toString());
             for (int x = 0; x < hikelist.get(i).hmarker.size(); x++){
                 Log.d("****", hikelist.get(i).hmarker.get(x).getMarkerId().toString());
