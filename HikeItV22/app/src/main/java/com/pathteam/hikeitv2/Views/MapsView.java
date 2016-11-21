@@ -213,6 +213,8 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
         }
     };
 
+
+
     //StartButton
     @OnClick(R.id.start_button)
     public void startHike() {

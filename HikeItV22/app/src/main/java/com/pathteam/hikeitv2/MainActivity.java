@@ -17,7 +17,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.RelativeLayout;
-
 import com.davidstemmer.flow.plugin.screenplay.ScreenplayDispatcher;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
@@ -25,7 +24,6 @@ import com.google.gson.reflect.TypeToken;
 import com.pathteam.hikeitv2.Model.HikeList;
 import com.pathteam.hikeitv2.Model.hMarker;
 import com.pathteam.hikeitv2.Stages.HikeItMapStage;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -34,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import flow.Flow;
