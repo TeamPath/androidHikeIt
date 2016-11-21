@@ -25,7 +25,7 @@
         />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/chat_button"
+        android:id="@+id/camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -33,9 +33,9 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@id/start_button"
-        android:src="@mipmap/chat"
+        android:src="@drawable/camera3"
         android:clickable="true"
-        android:visibility="invisible"
+        android:visibility="visible"
         />
 
     <android.support.design.widget.FloatingActionButton
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="30dp"
-        android:layout_toRightOf="@id/chat_button"
+        android:layout_toRightOf="@id/camera_button"
         android:src="@drawable/stop"
         android:clickable="true"
         android:visibility="visible"/>

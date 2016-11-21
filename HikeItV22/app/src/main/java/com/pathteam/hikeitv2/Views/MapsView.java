@@ -34,6 +34,7 @@ import com.pathteam.hikeitv2.Stages.SaveHikeStage;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -56,19 +57,28 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
     private double lng = 0;
     public String name;
     public String id;
-    Date date = new Date();
+   // Date date = new Date();
     Location oldLocation = new Location("none");
     Location newLocation = new Location("newLocation");
     float distance = 0;
     float totalDis = 0;
     LatLng oldcoord;
+    double value;
 
     Handler handler = new Handler();
 
     @Bind(map)
     MapView mapView;
 
+
+    java.util.Date date = new java.util.Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+    //System.out.println(sdf.format(date));
+
+
+
     public ArrayList<hMarker> markers = new ArrayList<>();
+
 
     public MapsView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -93,12 +103,17 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
             Integer markerNum = i;
             if (Home != null) {
                 mMap.addMarker(new MarkerOptions()
-                        .snippet("Marker: " + markerNum)
+                        .snippet("Marker: " + markerNum+", "+"Miles :"+ value)
+
                         .zIndex(i)
                         .draggable(true)
-                        .title(date.toString())
+                        .title("TIME: "+sdf.format(date).toString())
                         .position(Home));
                 Log.d("@@@@@@@", "Hello");
+
+                //System.out.println(sdf.format(date));
+               // markers.add(sdf.format(date).toString());
+
                 hMarker currentMarker = new hMarker(markerNum, Home, date);
                 markers.add(currentMarker);
 
@@ -185,15 +200,23 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 }
                 oldcoord = Home;
                 date = new Date();
+                //System.out.println(sdf.format(date));
+
                 //This measures from point to point on the polyline, converts it to miles
                 distance = oldLocation.distanceTo(newLocation) / 1609;
+
                 // oldLocation is the location you were at last onChange
                 oldLocation.setLatitude(lat);
                 oldLocation.setLongitude(lng);
+
+                // adds the total distance of your Hike
+                totalDis = totalDis + distance;
+                String trip = String.valueOf(totalDis);
+                value = Double.parseDouble(trip);
+                value = Math.round(totalDis * 1000.0)/1000.0;
+                Log.d("*******", String.valueOf(value));
             }
-            // adds the total distance of your Hike
-            totalDis = totalDis + distance;
-            Log.d("*******", String.valueOf(totalDis));
+
         }
     };
 
@@ -220,7 +243,14 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
 
     }
 
-}
+
+    @OnClick(R.id.camera_button)
+   public void startCamera() {
+       //MainActivity.openCamera();
+        ((MainActivity) getContext()).openCamera();
+
+    }
+   }
 
 
 
