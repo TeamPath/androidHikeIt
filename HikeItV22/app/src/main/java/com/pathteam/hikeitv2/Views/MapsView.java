@@ -123,7 +123,7 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 }
 
             }
-            handler.postDelayed(this, 30000);
+            handler.postDelayed(this, 15000);
         }
     };
 
