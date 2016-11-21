@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.pathteam.hikeitv2.Components.Constants;
+import com.pathteam.hikeitv2.Components.Utils;
 import com.pathteam.hikeitv2.MainActivity;
 import com.pathteam.hikeitv2.Model.MarkerLoadedEvent;
 import com.pathteam.hikeitv2.Model.hMarker;
@@ -58,6 +60,13 @@ public class SaveHikeView extends RelativeLayout {
         super.onFinishInflate();
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
+
+        for (int x = 0; x < Constants.markersArray.size(); x++) {
+            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getMarkerId().toString());
+            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getDate().toString());
+            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getMarkerPos().toString());
+        }
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -79,6 +88,14 @@ public class SaveHikeView extends RelativeLayout {
     @OnClick(R.id.pick_photo_button)
     public void getPic() {
         ((MainActivity) getContext()).getImage();
+
     }
+    @OnClick(R.id.saveButton)
+    public void save() {
+
+        Log.d("PIC", Utils.encodeTobase64(Constants.me));
+    }
+
+
 
 }

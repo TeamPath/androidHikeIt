@@ -27,6 +27,7 @@ import com.davidstemmer.flow.plugin.screenplay.ScreenplayDispatcher;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.pathteam.hikeitv2.Components.Constants;
 import com.pathteam.hikeitv2.Components.Utils;
 import com.pathteam.hikeitv2.Model.HikeList;
 import com.pathteam.hikeitv2.Model.hMarker;
@@ -405,6 +406,7 @@ public class MainActivity extends AppCompatActivity {
             Bitmap image = BitmapFactory.decodeFile(picturePath);
             Utils.encodeTobase64(image);
             imageView.setImageBitmap(image);
+            Constants.me= image;
 
         }
 

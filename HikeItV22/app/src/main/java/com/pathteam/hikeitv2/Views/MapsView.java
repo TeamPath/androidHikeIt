@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.pathteam.hikeitv2.Components.Constants;
 import com.pathteam.hikeitv2.HikeApplication;
 import com.pathteam.hikeitv2.MainActivity;
 import com.pathteam.hikeitv2.Model.MarkerLoadedEvent;
@@ -222,6 +223,8 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
 
 
 
+
+
     //StartButton
     @OnClick(R.id.start_button)
     public void startHike() {
@@ -236,6 +239,7 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
     public void saveHike() {
 
         handler.removeCallbacks(r);
+        Constants.markersArray=markers;
 
         EventBus.getDefault().post(new MarkerLoadedEvent(markers));
 
@@ -244,6 +248,7 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 .push(new SaveHikeStage())
                 .build();
         flow.setHistory(newHistory, Flow.Direction.FORWARD);
+
 
     }
 
