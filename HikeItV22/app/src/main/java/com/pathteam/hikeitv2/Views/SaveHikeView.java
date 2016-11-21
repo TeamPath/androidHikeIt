@@ -53,14 +53,6 @@ public class SaveHikeView extends RelativeLayout {
         super.onFinishInflate();
         ButterKnife.bind(this);
 
-//        ((MapsView)context.)
-//
-//        for (int x = 0; x < markerHolder.size(); x++) {
-//            Log.i("@@EVENT BUS MARKER@@: ", markerHolder.get(x).getMarkerId().toString());
-//            Log.i("@@EVENT BUS MARKER@@: ", markerHolder.get(x).getDate().toString());
-//            Log.i("@@EVENT BUS MARKER@@: ", markerHolder.get(x).getMarkerPos().toString());
-//        }
-
     }
 
     @Override
