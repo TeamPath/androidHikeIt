@@ -162,16 +162,19 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
 
             // Determines first marker of the Marker Array
-            if(i >= 1) {
+            if (oldcoord != null){
+
                 mMap.addPolyline((new PolylineOptions())
                         .add(Home, oldcoord)
                         .color(Color.RED)
                         .width(25));
-            }
+
             i++;
-            oldcoord = marker.getMarkerPos();
+            }
+//            oldcoord = marker.getMarkerPos();
+            oldcoord=Home;
         }
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Home, 20));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Home, 14));
     }
 
     @Override

@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
             hikelist.add(new HikeList("Cave Run Lake Trails", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
 
 //this adds a few points to each of our hikes in our list.
-            
+
             //this adds a few points to each of our hikes in our list.
 
             hikelist.get(0).hmarker.add(new hMarker(1,setup1,new Date()));
