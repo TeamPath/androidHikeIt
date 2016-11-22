@@ -76,17 +76,6 @@ public class SaveHikeView extends RelativeLayout {
 
     }
 
-
-//        ((MapsView)context.)
-//
-//        for (int x = 0; x < markerHolder.size(); x++) {
-//            Log.i("@@EVENT BUS MARKER@@: ", markerHolder.get(x).getMarkerId().toString());
-//            Log.i("@@EVENT BUS MARKER@@: ", markerHolder.get(x).getDate().toString());
-//            Log.i("@@EVENT BUS MARKER@@: ", markerHolder.get(x).getMarkerPos().toString());
-//        }
-
-
-
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
@@ -100,6 +89,7 @@ public class SaveHikeView extends RelativeLayout {
     }
     @OnClick(R.id.saveButton)
     public void save() {
+<<<<<<< HEAD
         EditText title   = (EditText)findViewById(R.id.hike_title);
         EditText note   = (EditText)findViewById(R.id.hike_notes);
         ((MainActivity) getContext()).hikelist.add(new HikeList(title.getText().toString(), Constants.markersArray,note.getText().toString(),Utils.encodeTobase64(Constants.me)));
@@ -107,6 +97,13 @@ public class SaveHikeView extends RelativeLayout {
             Flow flow = HikeApplication.getMainFlow();
         flow.setHistory(History.single(new MainMenuStage()),
                 Flow.Direction.BACKWARD);
+=======
+
+        ((MainActivity) getContext()).hikelist.add(new HikeList("Mayo Lake Trail", Constants.markersArray,"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....",Utils.encodeTobase64(Constants.me)));
+        if (Constants.me != null) {
+            Log.d("PIC", Utils.encodeTobase64(Constants.me));
+        }
+>>>>>>> master
     }
 
 

@@ -162,8 +162,11 @@ public class MainActivity extends AppCompatActivity {
             hikelist.add(new HikeList("Paintsville Lake Trail", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
             hikelist.add(new HikeList("Carter Caves Hike", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
             hikelist.add(new HikeList("Cave Run Lake Trails", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
+<<<<<<< HEAD
 //this adds a few points to each of our hikes in our list.
 
+=======
+>>>>>>> master
 
             //this adds a few points to each of our hikes in our list.
 

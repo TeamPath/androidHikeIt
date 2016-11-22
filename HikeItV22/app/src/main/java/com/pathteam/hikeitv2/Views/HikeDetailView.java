@@ -79,6 +79,9 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
     @Bind(R.id.mapview)
     MapView mapView;
 
+    @Bind(R.id.hike_notes)
+    TextView hikeNotes;
+
     @Bind(R.id.back)
     Button back;
 
@@ -104,9 +107,13 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
         hike = hikelist.get(position);
         markers = hike.hmarker;
 
+        //Set information from Array to our Hike Detail UI
         title.setText(hike.getTitle());
-        i = 0;
+        date.setText(hike.hmarker.get(0).getDate().toString());
+        hikeNotes.setText(hike.getHikeNotes());
 
+        //Resets i to 0 everytime screen inflates, in order to help select first marker for poly line
+        i = 0;
     }
 
     @Override
@@ -153,6 +160,7 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
             Home = marker.getMarkerPos();
 
 
+            // Determines first marker of the Marker Array
             if(i >= 1) {
                 mMap.addPolyline((new PolylineOptions())
                         .add(Home, oldcoord)
@@ -162,14 +170,14 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
             i++;
             oldcoord = marker.getMarkerPos();
         }
-
-
-
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     }
 }
