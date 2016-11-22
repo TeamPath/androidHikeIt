@@ -164,10 +164,7 @@ public class MainActivity extends AppCompatActivity {
             hikelist.add(new HikeList("Cave Run Lake Trails", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
 
 //this adds a few points to each of our hikes in our list.
-
-
-
-
+            
             //this adds a few points to each of our hikes in our list.
 
             hikelist.get(0).hmarker.add(new hMarker(1,setup1,new Date()));
@@ -200,8 +197,6 @@ public class MainActivity extends AppCompatActivity {
 
             updateAllItems();
             testArrays();
-
-
         }
     }
 // this writes the json file for saving.  and we will call this method each time we end or save a hike.
@@ -261,6 +256,8 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+    // This is used to use the camera
 
     public static void saveToPreferences(Context context, String key, Boolean allowed) {
         SharedPreferences myPrefs = context.getSharedPreferences(CAMERA_PREF,
@@ -385,6 +382,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         startActivity(intent);
     }
+
+    // This is used to get pic from the gallery
 
     public void getImage(){
         Intent i = new Intent(

@@ -144,7 +144,7 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng first;
+
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         UiSettings UiSettings = mMap.getUiSettings();
