@@ -162,11 +162,11 @@ public class MainActivity extends AppCompatActivity {
             hikelist.add(new HikeList("Paintsville Lake Trail", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
             hikelist.add(new HikeList("Carter Caves Hike", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
             hikelist.add(new HikeList("Cave Run Lake Trails", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
-<<<<<<< HEAD
+
 //this adds a few points to each of our hikes in our list.
 
-=======
->>>>>>> master
+
+
 
             //this adds a few points to each of our hikes in our list.
 
@@ -412,9 +412,10 @@ public class MainActivity extends AppCompatActivity {
 
             ImageView imageView = (ImageView) findViewById(R.id.galleryPicture);
             Bitmap image = BitmapFactory.decodeFile(picturePath);
-            Utils.encodeTobase64(image);
-            imageView.setImageBitmap(image);
-            Constants.me= image;
+            Bitmap smallImg = Utils.resize(image);
+            Utils.encodeTobase64(smallImg);
+            imageView.setImageBitmap(smallImg);
+            Constants.me= smallImg;
 
         }
 

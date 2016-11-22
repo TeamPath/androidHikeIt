@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -170,14 +171,12 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
             i++;
             oldcoord = marker.getMarkerPos();
         }
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Home, 20));
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-<<<<<<< HEAD
 
-=======
->>>>>>> master
     }
 }
