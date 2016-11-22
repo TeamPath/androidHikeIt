@@ -68,6 +68,9 @@ public class HikeListAdapter extends RecyclerView.Adapter<HikeListAdapter.HikeHo
         @Bind(R.id.title)
         TextView title;
 
+        @Bind(R.id.date)
+        TextView date;
+
         public HikeHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -76,10 +79,9 @@ public class HikeListAdapter extends RecyclerView.Adapter<HikeListAdapter.HikeHo
 
         //        Lets put our data in our UI
         public void bindHikes(final HikeList hikes) {
-
             hikeNotes.setText(hikes.getHikeNotes());
             title.setText(hikes.getTitle());
-
+            date.setText(hikes.hmarker.get(0).getDate().toString());
         }
 
         //On Click for List Hike View items

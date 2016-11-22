@@ -81,6 +81,7 @@ public class SaveHikeView extends RelativeLayout {
     }
     @OnClick(R.id.saveButton)
     public void save() {
+
         ((MainActivity) getContext()).hikelist.add(new HikeList("Mayo Lake Trail", Constants.markersArray,"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....",Utils.encodeTobase64(Constants.me)));
         if (Constants.me != null) {
             Log.d("PIC", Utils.encodeTobase64(Constants.me));
