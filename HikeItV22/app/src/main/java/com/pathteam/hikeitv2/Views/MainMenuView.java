@@ -92,7 +92,7 @@ public class MainMenuView extends RelativeLayout{
         History newHistory = flow.getHistory().buildUpon()
                 .push(new HikeItMapStage())
                 .build();
-        flow.setHistory(newHistory, Flow.Direction.FORWARD);;
+        flow.setHistory(newHistory, Flow.Direction.FORWARD);
     }
 
     @OnClick(R.id.hike_list)

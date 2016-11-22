@@ -79,4 +79,15 @@
         android:id="@+id/textView"
         android:textSize="18sp"/>
 
+    <Button
+        android:text="Get More Info"
+        android:textSize="11sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/getDetailsButton"
+        android:layout_alignBaseline="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_toEndOf="@+id/textView"
+        style="@style/Widget.AppCompat.Button.Borderless" />
+
 </com.pathteam.hikeitv2.Views.CaloriesBurnedView>

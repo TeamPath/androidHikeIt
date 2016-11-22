@@ -147,9 +147,6 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
         }
         mMap.setMyLocationEnabled(true);
-<<<<<<< HEAD
-       // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Home, 18));
-=======
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers.get(0).getMarkerPos(), 18));
 
@@ -175,6 +172,5 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
->>>>>>> master
     }
 }
