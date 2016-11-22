@@ -10,15 +10,19 @@ import android.widget.RelativeLayout;
 
 import com.pathteam.hikeitv2.Components.Constants;
 import com.pathteam.hikeitv2.Components.Utils;
+import com.pathteam.hikeitv2.HikeApplication;
 import com.pathteam.hikeitv2.MainActivity;
 import com.pathteam.hikeitv2.Model.HikeList;
 import com.pathteam.hikeitv2.R;
+import com.pathteam.hikeitv2.Stages.MainMenuStage;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import flow.Flow;
+import flow.History;
 
 
 /**
@@ -47,6 +51,8 @@ public class SaveHikeView extends RelativeLayout {
     @Bind(R.id.galleryPicture)
     ImageView galleryPicture;
 
+
+
     public SaveHikeView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
@@ -55,6 +61,8 @@ public class SaveHikeView extends RelativeLayout {
 
     @Override
     protected void onFinishInflate() {
+
+
 
         super.onFinishInflate();
         ButterKnife.bind(this);
@@ -92,10 +100,13 @@ public class SaveHikeView extends RelativeLayout {
     }
     @OnClick(R.id.saveButton)
     public void save() {
-        ((MainActivity) getContext()).hikelist.add(new HikeList("Mayo Lake Trail", Constants.markersArray,"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....",Utils.encodeTobase64(Constants.me)));
-        if (Constants.me != null) {
-            Log.d("PIC", Utils.encodeTobase64(Constants.me));
-        }
+        EditText title   = (EditText)findViewById(R.id.hike_title);
+        EditText note   = (EditText)findViewById(R.id.hike_notes);
+        ((MainActivity) getContext()).hikelist.add(new HikeList(title.getText().toString(), Constants.markersArray,note.getText().toString(),Utils.encodeTobase64(Constants.me)));
+        ((MainActivity) getContext()).writeHikes();
+            Flow flow = HikeApplication.getMainFlow();
+        flow.setHistory(History.single(new MainMenuStage()),
+                Flow.Direction.BACKWARD);
     }
 
 
