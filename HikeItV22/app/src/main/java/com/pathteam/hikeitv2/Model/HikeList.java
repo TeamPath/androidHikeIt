@@ -2,7 +2,6 @@ package com.pathteam.hikeitv2.Model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 
 /**
@@ -10,41 +9,61 @@ import java.util.ArrayList;
  */
 
 public class HikeList {
-    @SerializedName("Title")
-    private String Title;
+
+    @SerializedName("title")
+    private String title;
 
     @SerializedName("markers")
     public ArrayList<hMarker> hmarker;
 
-    @SerializedName("HikeNotes")
-    public String hikenotes;
+    @SerializedName("hikeNotes")
+    public String hikeNotes;
+
+    @SerializedName("imagestring")
+    public String imageString;
 
 
-
-    public HikeList(String title, ArrayList<hMarker> hmarker, String hikenotes) {
-        Title = title;
+    public HikeList(String title, ArrayList<hMarker> hmarker, String hikenotes, String imageString) {
+        this.title = title;
         this.hmarker = hmarker;
-        this.hikenotes = hikenotes;
+        this.hikeNotes = hikenotes;
+        this.imageString = imageString;
     }
 
     public HikeList(String title, ArrayList<hMarker> hmarker) {
-        Title = title;
+        this.title = title;
         this.hmarker = hmarker;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
-    public String getHikenotes() {
-        return hikenotes;
+    public String getHikeNotes() {
+        return hikeNotes;
     }
 
-    public void setHikenotes(String hikenotes) {
-        this.hikenotes = hikenotes;
+    public void setHikeNotes(String hikeNotes) {
+        this.hikeNotes = hikeNotes;
+    }
+
+    public String getImageString() {
+        return imageString;
+    }
+
+    public void setImageString(String imageString) {
+        this.imageString = imageString;
+    }
+
+    public ArrayList<hMarker> getHmarker() {
+        return hmarker;
+    }
+
+    public void setHmarker(ArrayList<hMarker> hmarker) {
+        this.hmarker = hmarker;
     }
 }

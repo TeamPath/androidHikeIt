@@ -8,18 +8,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.pathteam.hikeitv2.Model.MarkerLoadedEvent;
-import com.pathteam.hikeitv2.Model.hMarker;
+import com.pathteam.hikeitv2.Components.Constants;
+import com.pathteam.hikeitv2.Components.Utils;
+import com.pathteam.hikeitv2.MainActivity;
+import com.pathteam.hikeitv2.Model.HikeList;
 import com.pathteam.hikeitv2.R;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 /**
  * Created by jeremiahlewis on 11/18/16.
@@ -28,7 +28,9 @@ import butterknife.ButterKnife;
 public class SaveHikeView extends RelativeLayout {
 
     private Context context;
-    private ArrayList <hMarker> loadedMarkers;
+
+    public ArrayList <HikeList> currentHike = new ArrayList<>();
+
 
     @Bind(R.id.saveButton)
     Button saveButton;
@@ -53,24 +55,50 @@ public class SaveHikeView extends RelativeLayout {
 
     @Override
     protected void onFinishInflate() {
+
         super.onFinishInflate();
         ButterKnife.bind(this);
-        EventBus.getDefault().register(this);
+       // EventBus.getDefault().register(this);
+
+        for (int x = 0; x < Constants.markersArray.size(); x++) {
+            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getMarkerId().toString());
+            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getDate().toString());
+            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getMarkerPos().toString());
+        }
+
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void loadMarkers(MarkerLoadedEvent event){
-        loadedMarkers = event.markers;
-        for (int x = 0; x < loadedMarkers.size(); x++) {
-            Log.i("@@EVENT BUS MARKER@@: ", loadedMarkers.get(x).getMarkerId().toString());
-            Log.i("@@EVENT BUS MARKER@@: ", loadedMarkers.get(x).getDate().toString());
-            Log.i("@@EVENT BUS MARKER@@: ", loadedMarkers.get(x).getMarkerPos().toString());
-        }
-    }
+
+//        ((MapsView)context.)
+//
+//        for (int x = 0; x < markerHolder.size(); x++) {
+//            Log.i("@@EVENT BUS MARKER@@: ", markerHolder.get(x).getMarkerId().toString());
+//            Log.i("@@EVENT BUS MARKER@@: ", markerHolder.get(x).getDate().toString());
+//            Log.i("@@EVENT BUS MARKER@@: ", markerHolder.get(x).getMarkerPos().toString());
+//        }
+
+
 
     @Override
     protected void onDetachedFromWindow() {
-        EventBus.getDefault().unregister(this);
         super.onDetachedFromWindow();
     }
+
+
+    @OnClick(R.id.pick_photo_button)
+    public void getPic() {
+        ((MainActivity) getContext()).getImage();
+
+    }
+    @OnClick(R.id.saveButton)
+    public void save() {
+        ((MainActivity) getContext()).hikelist.add(new HikeList("Mayo Lake Trail", Constants.markersArray,"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....",Utils.encodeTobase64(Constants.me)));
+        if (Constants.me != null) {
+            Log.d("PIC", Utils.encodeTobase64(Constants.me));
+        }
+    }
+
+
+
+
 }

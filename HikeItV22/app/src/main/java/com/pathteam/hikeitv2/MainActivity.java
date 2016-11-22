@@ -8,20 +8,27 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.davidstemmer.flow.plugin.screenplay.ScreenplayDispatcher;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.pathteam.hikeitv2.Components.Constants;
+import com.pathteam.hikeitv2.Components.Utils;
 import com.pathteam.hikeitv2.Model.HikeList;
 import com.pathteam.hikeitv2.Model.hMarker;
 import com.pathteam.hikeitv2.Stages.HikeItMapStage;
@@ -46,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
+
+    private static final int RESULT_LOAD_IMAGE=1;
 
     String filename = "HikeHistoryFile";
     Gson gson = new Gson();
@@ -80,6 +89,22 @@ public class MainActivity extends AppCompatActivity {
         gson = new Gson();
         // lets go get our saved hikes!
         setupHikes();
+
+
+        if (Build.VERSION.SDK_INT >= 23){
+            if (!(ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                    PackageManager.PERMISSION_GRANTED)){
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+            }
+            if (!(ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                    PackageManager.PERMISSION_GRANTED)){
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            }
+        }
 
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -133,10 +158,17 @@ public class MainActivity extends AppCompatActivity {
             readHikes(hikeFile);
         }else{
             // set up new hike info we will start with 3 hikes and each will have a set of markers.
+<<<<<<< HEAD
+            hikelist.add(new HikeList("Paintsville Lake Trail", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
+            hikelist.add(new HikeList("Carter Caves Hike", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
+            hikelist.add(new HikeList("Cave Run Lake Trails", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
+//this adds a few points to each of our hikes in our list.
+=======
             hikelist.add(new HikeList("Paintsville Lake Trail", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space...."));
             hikelist.add(new HikeList("Carter Caves Hike", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space...."));
             hikelist.add(new HikeList("Cave Run Lake Trails", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space...."));
-//this adds a few points to each of our hikes in our list.
+            //this adds a few points to each of our hikes in our list.
+>>>>>>> master
             hikelist.get(0).hmarker.add(new hMarker(1,setup1,new Date()));
             hikelist.get(0).hmarker.add(new hMarker(2,setup4,new Date()));
             hikelist.get(1).hmarker.add(new hMarker(1,setup2,new Date()));
@@ -210,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < listsize; i++){
             Log.d("!!!!!", hikelist.get(i).getTitle());
-            Log.d("!!!!!", hikelist.get(i).getHikenotes());
+            Log.d("!!!!!", hikelist.get(i).getHikeNotes());
             Log.d("!!!!!", hikelist.get(i).hmarker.get(0).getDate().toString());
             for (int x = 0; x < hikelist.get(i).hmarker.size(); x++){
                 Log.d("****", hikelist.get(i).hmarker.get(x).getMarkerId().toString());
@@ -351,6 +383,41 @@ public class MainActivity extends AppCompatActivity {
     public void openCamera() {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         startActivity(intent);
+    }
+
+    public void getImage(){
+        Intent i = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(i, RESULT_LOAD_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            ImageView imageView = (ImageView) findViewById(R.id.galleryPicture);
+            Bitmap image = BitmapFactory.decodeFile(picturePath);
+            Utils.encodeTobase64(image);
+            imageView.setImageBitmap(image);
+            Constants.me= image;
+
+        }
+
+
     }
 
 }
