@@ -412,8 +412,5 @@ public class MainActivity extends AppCompatActivity {
             Constants.me= image;
 
         }
-
-
     }
-
 }
