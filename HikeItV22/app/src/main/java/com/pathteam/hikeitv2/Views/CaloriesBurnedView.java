@@ -40,6 +40,8 @@ public class CaloriesBurnedView extends RelativeLayout {
     TextView displayCaloriesBurned;
     @Bind(R.id.calculateButton)
     Button calculateButton;
+    @Bind(R.id.getDetailsButton)
+    Button getDetailsButton;
     public CaloriesBurnedView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }

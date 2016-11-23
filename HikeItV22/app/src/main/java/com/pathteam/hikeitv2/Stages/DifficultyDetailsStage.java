@@ -22,7 +22,7 @@ public class DifficultyDetailsStage extends IndexedStage {
     }
     @Override
     public int getLayoutId() {
-        return R.layout.hike_detail_view;
+        return R.layout.difficulty_details_view;
     }
     @Override
     public Stage.Rigger getRigger() {

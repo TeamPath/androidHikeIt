@@ -10,6 +10,7 @@ import com.pathteam.hikeitv2.R;
 import com.pathteam.hikeitv2.Stages.CaloriesBurnedStage;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import flow.Flow;
 import flow.History;
@@ -27,12 +28,18 @@ public class DifficultyDetailsView extends LinearLayout {
 
     }
 
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        ButterKnife.bind(this);
+    }
+
     @OnClick(R.id.confirm_button)
-    public void goBack(){
+    public void goBackwards(){
         Flow flow = HikeApplication.getMainFlow();
         History newHistory = flow.getHistory().buildUpon()
                 .push(new CaloriesBurnedStage())
                 .build();
         flow.setHistory(newHistory, Flow.Direction.FORWARD);
+        }
     }
-}
