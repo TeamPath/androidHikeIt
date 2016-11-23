@@ -25,11 +25,11 @@ import flow.History;
 public class CaloriesBurnedView extends RelativeLayout {
     Double MET;
     Double totalCaloriesBurned;
+    private Context context;
 
     @Bind(R.id.selectedWeight)
     EditText selectedWeight;
-    @Bind(R.id.durationOfHike)
-    EditText durationOfHike;
+
     @Bind(R.id.lightButton)
     RadioButton lightButton;
     @Bind(R.id.moderateButton)
@@ -44,6 +44,7 @@ public class CaloriesBurnedView extends RelativeLayout {
     Button getDetailsButton;
     public CaloriesBurnedView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
     @Override
     protected void onFinishInflate() {
@@ -60,22 +61,22 @@ public class CaloriesBurnedView extends RelativeLayout {
         if(intenseButton.isChecked()){
             MET = 5.3;
         }
-        String Time = durationOfHike.getText().toString();
-        Double totalTime = Double.parseDouble(Time);
+//        String Time = durationOfHike.getText().toString();
+//        Double totalTime = Double.parseDouble(Time);
 
-        String weight = selectedWeight.getText().toString();
-        Double totalWeight = Double.parseDouble(weight);
-
-        totalCaloriesBurned = ((totalTime*60) *(MET *(totalWeight/2.2)))/200;
-        totalCaloriesBurned = Math.round(totalCaloriesBurned *100.0)/100.0;
+//        String weight = selectedWeight.getText().toString();
+//        Double totalWeight = Double.parseDouble(weight);
+//
+//        totalCaloriesBurned = ((totalTime*60) *(MET *(totalWeight/2.2)))/200;
+//        totalCaloriesBurned = Math.round(totalCaloriesBurned *100.0)/100.0;
         return totalCaloriesBurned;
     }
-    @OnClick(R.id.calculateButton)
-    public void Calculate(){
-        calculateCaloriesBurned();
-        String caloriesBurned = totalCaloriesBurned.toString();
-        displayCaloriesBurned.setText(caloriesBurned);
-    }
+//    @OnClick(R.id.calculateButton)
+//    public void Calculate(){
+//        calculateCaloriesBurned();
+//        String caloriesBurned = totalCaloriesBurned.toString();
+//        displayCaloriesBurned.setText(caloriesBurned);
+//    }
 
     @OnClick(R.id.getDetailsButton)
     public void getDetails(){

@@ -14,10 +14,11 @@
         android:text="Calculate" />
     <EditText
         android:id="@+id/selectedWeight"
+        android:textStyle=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="70dp"
         android:layout_marginTop="25dp"
         android:ems="10"
         android:hint="Current Weight(in pounds)"
@@ -27,19 +28,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/calculateButton"
-        android:layout_marginBottom="63dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
         android:layout_centerHorizontal="true"
         android:textSize="30sp" />
-    <EditText
-        android:id="@+id/durationOfHike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Duration of Hike"
-        android:inputType="numberDecimal"
-        android:textAlignment="center"
-        android:layout_below="@+id/selectedWeight"
-        android:layout_alignStart="@+id/selectedWeight" />
+
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,7 +58,7 @@
             android:id="@+id/intenseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Intense"
+            android:text="Difficult"
             android:layout_marginStart="50dp"/>
     </RadioGroup>
 
@@ -76,18 +69,50 @@
         android:layout_above="@+id/radioGroup"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="26dp"
-        android:id="@+id/textView"
+        android:id="@+id/selectDifficulty"
+        android:textStyle="bold"
         android:textSize="18sp"/>
 
     <Button
         android:text="Get More Info"
-        android:textSize="11sp"
+        android:textSize="12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/getDetailsButton"
-        android:layout_alignBaseline="@+id/textView"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_toEndOf="@+id/textView"
+        android:layout_alignBaseline="@+id/selectDifficulty"
+        android:layout_alignBottom="@+id/selectDifficulty"
+        android:layout_toEndOf="@+id/selectDifficulty"
         style="@style/Widget.AppCompat.Button.Borderless" />
+
+    <EditText
+        android:hint="minutes"
+        android:inputType="number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/selectedHours"
+        android:layout_alignBottom="@+id/selectedHours"
+        android:layout_alignEnd="@+id/selectedWeight"
+        android:id="@+id/selectedMinutes" />
+
+    <EditText
+        android:hint="hours"
+        android:inputType="number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/selectedHours"
+        android:layout_below="@+id/selectedWeight"
+        android:layout_alignStart="@+id/selectedWeight" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How Long Was Your Hike?"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/selectedMinutes"
+        android:id="@+id/textView" />
+
 
 </com.pathteam.hikeitv2.Views.CaloriesBurnedView>
