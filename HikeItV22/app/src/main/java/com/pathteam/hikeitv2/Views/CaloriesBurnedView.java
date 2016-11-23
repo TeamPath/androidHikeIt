@@ -8,11 +8,15 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.pathteam.hikeitv2.HikeApplication;
 import com.pathteam.hikeitv2.R;
+import com.pathteam.hikeitv2.Stages.DifficultyDetailsStage;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import flow.Flow;
+import flow.History;
 
 /**
  * Created by JoshuaMabry on 11/18/16.
@@ -36,6 +40,8 @@ public class CaloriesBurnedView extends RelativeLayout {
     TextView displayCaloriesBurned;
     @Bind(R.id.calculateButton)
     Button calculateButton;
+    @Bind(R.id.getDetailsButton)
+    Button getDetailsButton;
     public CaloriesBurnedView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -69,5 +75,15 @@ public class CaloriesBurnedView extends RelativeLayout {
         calculateCaloriesBurned();
         String caloriesBurned = totalCaloriesBurned.toString();
         displayCaloriesBurned.setText(caloriesBurned);
+    }
+
+    @OnClick(R.id.getDetailsButton)
+    public void getDetails(){
+        Flow flow = HikeApplication.getMainFlow();
+        History newHistory = flow.getHistory().buildUpon()
+                .push(new DifficultyDetailsStage())
+                .build();
+        flow.setHistory(newHistory, Flow.Direction.FORWARD);
+
     }
 }
