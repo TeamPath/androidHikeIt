@@ -25,60 +25,93 @@ import flow.History;
 public class CaloriesBurnedView extends RelativeLayout {
     Double MET;
     Double totalCaloriesBurned;
+    Integer totalTimeInHours;
+    Integer totalTimeInMinutes;
+    Double totalWeight;
 
     @Bind(R.id.selectedWeight)
     EditText selectedWeight;
-    @Bind(R.id.durationOfHike)
-    EditText durationOfHike;
+
     @Bind(R.id.lightButton)
     RadioButton lightButton;
+
     @Bind(R.id.moderateButton)
     RadioButton moderateButton;
+
     @Bind(R.id.intenseButton)
     RadioButton intenseButton;
+
     @Bind(R.id.displayCaloriesBurned)
     TextView displayCaloriesBurned;
+
     @Bind(R.id.calculateButton)
     Button calculateButton;
+
     @Bind(R.id.getDetailsButton)
     Button getDetailsButton;
+
+    @Bind(R.id.selectedMinutes)
+    EditText selectedMinutes;
+
+    @Bind(R.id.selectedHours)
+    EditText selectedHours;
+
     public CaloriesBurnedView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.bind(this);
     }
-    private Double calculateCaloriesBurned(){
-        if(lightButton.isChecked()){
+
+    private Double calculateCaloriesBurned() {
+        if (lightButton.isChecked()) {
             MET = 2.3;
         }
-        if(moderateButton.isChecked()){
+        if (moderateButton.isChecked()) {
             MET = 3.6;
         }
-        if(intenseButton.isChecked()){
+        if (intenseButton.isChecked()) {
             MET = 5.3;
         }
-        String Time = durationOfHike.getText().toString();
-        Double totalTime = Double.parseDouble(Time);
+        String timeInMinutes = selectedMinutes.getText().toString();
+        try {
+            totalTimeInMinutes = Integer.parseInt(timeInMinutes);
+        } catch(NumberFormatException ex) {
+            if (selectedMinutes == null) {
+                totalTimeInMinutes = 0;
+            }
+        }
+
+        String timeInHours = selectedHours.getText().toString();
+        try {
+            totalTimeInHours = Integer.parseInt(timeInHours);
+        } catch(NumberFormatException ex) {
+            if (selectedHours == null) {
+                totalTimeInHours = 0;
+            }
+        }
 
         String weight = selectedWeight.getText().toString();
-        Double totalWeight = Double.parseDouble(weight);
+         totalWeight = Double.parseDouble(weight);
 
-        totalCaloriesBurned = ((totalTime*60) *(MET *(totalWeight/2.2)))/200;
+        totalCaloriesBurned = (((totalTimeInHours*60)+totalTimeInMinutes) *(MET *(totalWeight/2.2)))/200;
         totalCaloriesBurned = Math.round(totalCaloriesBurned *100.0)/100.0;
         return totalCaloriesBurned;
     }
     @OnClick(R.id.calculateButton)
     public void Calculate(){
-        calculateCaloriesBurned();
-        String caloriesBurned = totalCaloriesBurned.toString();
-        displayCaloriesBurned.setText(caloriesBurned);
+            calculateCaloriesBurned();
+            String caloriesBurned = totalCaloriesBurned.toString();
+            displayCaloriesBurned.setText(caloriesBurned);
+
     }
 
+
     @OnClick(R.id.getDetailsButton)
-    public void getDetails(){
+    public void getDetails() {
         Flow flow = HikeApplication.getMainFlow();
         History newHistory = flow.getHistory().buildUpon()
                 .push(new DifficultyDetailsStage())
