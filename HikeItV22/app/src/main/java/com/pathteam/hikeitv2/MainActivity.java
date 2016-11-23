@@ -164,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
 //this adds a few points to each of our hikes in our list.
 //this adds a few points to each of our hikes in our list.
 
+//this adds a few points to each of our hikes in our list.
+
             //this adds a few points to each of our hikes in our list.
 
             hikelist.get(0).hmarker.add(new hMarker(1,setup1,new Date()));
