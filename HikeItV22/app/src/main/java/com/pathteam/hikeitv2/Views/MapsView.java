@@ -13,7 +13,6 @@ import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.RelativeLayout;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,17 +30,14 @@ import com.pathteam.hikeitv2.MainActivity;
 import com.pathteam.hikeitv2.Model.hMarker;
 import com.pathteam.hikeitv2.R;
 import com.pathteam.hikeitv2.Stages.SaveHikeStage;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import flow.Flow;
 import flow.History;
-
 import static com.pathteam.hikeitv2.R.id.map;
 
 public class MapsView extends RelativeLayout implements OnMapReadyCallback,
@@ -55,28 +51,23 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
     private double lng = 0;
     public String name;
     public String id;
-   // Date date = new Date();
     Location oldLocation = new Location("none");
     Location newLocation = new Location("newLocation");
     float distance = 0;
     float totalDis = 0;
     LatLng oldcoord;
     double value;
-
     Handler handler = new Handler();
 
     @Bind(map)
     MapView mapView;
 
-
+// formats date to just hours and min.
     java.util.Date date = new java.util.Date();
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-    //System.out.println(sdf.format(date));
-
 
 
     public ArrayList<hMarker> markers = new ArrayList<>();
-
 
     public MapsView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -214,12 +205,8 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 value = Math.round(totalDis * 1000.0)/1000.0;
                 Log.d("*******", String.valueOf(value));
             }
-
         }
     };
-
-
-
 
 
     //StartButton
@@ -243,14 +230,10 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 .push(new SaveHikeStage())
                 .build();
         flow.setHistory(newHistory, Flow.Direction.FORWARD);
-
-
     }
-
 
     @OnClick(R.id.camera_button)
    public void startCamera() {
-       //MainActivity.openCamera();
         ((MainActivity) getContext()).openCamera();
 
     }

@@ -162,7 +162,9 @@ public class MainActivity extends AppCompatActivity {
             hikelist.add(new HikeList("Carter Caves Hike", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
             hikelist.add(new HikeList("Cave Run Lake Trails", new ArrayList<hMarker>(),"A trail surrounding the lake. Easy to Medium Difficulty level. Some more text to fill space....","IMAGE"));
 //this adds a few points to each of our hikes in our list.
+//this adds a few points to each of our hikes in our list.
 
+            //this adds a few points to each of our hikes in our list.
 
             hikelist.get(0).hmarker.add(new hMarker(1,setup1,new Date()));
             hikelist.get(0).hmarker.add(new hMarker(2,setup4,new Date()));
@@ -194,13 +196,11 @@ public class MainActivity extends AppCompatActivity {
 
             updateAllItems();
             testArrays();
-
-
         }
     }
 // this writes the json file for saving.  and we will call this method each time we end or save a hike.
 
-    private void writeHikes() {
+    public void writeHikes() {
         FileOutputStream outputStream = null;
         try {
             outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
@@ -255,6 +255,8 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+    // This is used to use the camera
 
     public static void saveToPreferences(Context context, String key, Boolean allowed) {
         SharedPreferences myPrefs = context.getSharedPreferences(CAMERA_PREF,
@@ -380,6 +382,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // This is used to get pic from the gallery
+
     public void getImage(){
         Intent i = new Intent(
                 Intent.ACTION_PICK,
@@ -406,13 +410,11 @@ public class MainActivity extends AppCompatActivity {
 
             ImageView imageView = (ImageView) findViewById(R.id.galleryPicture);
             Bitmap image = BitmapFactory.decodeFile(picturePath);
-            Utils.encodeTobase64(image);
-            imageView.setImageBitmap(image);
-            Constants.me= image;
+            Bitmap smallImg = Utils.resize(image);
+            Utils.encodeTobase64(smallImg);
+            imageView.setImageBitmap(smallImg);
+            Constants.me= smallImg;
 
         }
-
-
     }
-
 }

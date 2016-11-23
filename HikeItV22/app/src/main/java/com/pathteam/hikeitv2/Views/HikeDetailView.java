@@ -144,7 +144,7 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng first;
+
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         UiSettings UiSettings = mMap.getUiSettings();
@@ -155,7 +155,6 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
         }
         mMap.setMyLocationEnabled(true);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers.get(0).getMarkerPos(), 18));
 
         for(hMarker marker : markers) {
             mMap.addMarker(new MarkerOptions().position(marker.getMarkerPos()));
@@ -163,19 +162,24 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
 
             // Determines first marker of the Marker Array
-            if(i >= 1) {
+            if (oldcoord != null){
+
                 mMap.addPolyline((new PolylineOptions())
                         .add(Home, oldcoord)
                         .color(Color.RED)
                         .width(25));
-            }
+
             i++;
-            oldcoord = marker.getMarkerPos();
+            }
+//            oldcoord = marker.getMarkerPos();
+            oldcoord=Home;
         }
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Home, 14));
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+
     }
 }
