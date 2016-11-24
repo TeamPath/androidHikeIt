@@ -12,8 +12,10 @@ import java.io.ByteArrayOutputStream;
  */
 
 public class Utils {
+
+
     public static Bitmap resize(Bitmap image) {
-        image = Bitmap.createScaledBitmap(image, 100, 100, false);
+            image = Bitmap.createScaledBitmap(image, 200, 150, false);
         return image;
     }
 

@@ -192,6 +192,7 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 //System.out.println(sdf.format(date));
 
                 //This measures from point to point on the polyline, converts it to miles
+                if (z < 1) {
                 distance = oldLocation.distanceTo(newLocation) / 1609;
 
                 // oldLocation is the location you were at last onChange
@@ -199,11 +200,12 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                 oldLocation.setLongitude(lng);
 
                 // adds the total distance of your Hike
-                totalDis = totalDis + distance;
-                String trip = String.valueOf(totalDis);
-                value = Double.parseDouble(trip);
-                value = Math.round(totalDis * 1000.0)/1000.0;
-                Log.d("*******", String.valueOf(value));
+                    totalDis = totalDis + distance;
+                    String trip = String.valueOf(totalDis);
+                    value = Double.parseDouble(trip);
+                    value = Math.round(totalDis * 1000.0) / 1000.0;
+                    Log.d("*******", String.valueOf(value));
+                }
             }
         }
     };
@@ -218,9 +220,12 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
         }
     }
 
+    int z= 0;
+
     //StopButton
     @OnClick(R.id.stop_button)
     public void saveHike() {
+        z++;
 
         handler.removeCallbacks(r);
         Constants.markersArray=markers;
