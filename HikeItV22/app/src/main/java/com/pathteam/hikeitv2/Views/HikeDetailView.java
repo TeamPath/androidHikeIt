@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -52,14 +51,8 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
     private GoogleMap mMap;
     public LatLng Home;
-    private double lat = 0;
-    private double lng = 0;
     public String name;
     public String id;
-    Location oldLocation = new Location("none");
-    Location newLocation = new Location("newLocation");
-    float distance = 0;
-    float totalDis = 0;
     LatLng oldcoord;
 
 
@@ -169,7 +162,7 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
             // Determines first marker of the Marker Array
             if (oldcoord != null){
-
+//                draws the poly lines
                 mMap.addPolyline((new PolylineOptions())
                         .add(Home, oldcoord)
                         .color(Color.RED)
@@ -177,7 +170,7 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
             i++;
             }
-//            oldcoord = marker.getMarkerPos();
+
             oldcoord=Home;
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Home, 14));
