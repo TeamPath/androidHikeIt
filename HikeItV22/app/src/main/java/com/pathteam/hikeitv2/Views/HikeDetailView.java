@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.pathteam.hikeitv2.Components.Utils;
 import com.pathteam.hikeitv2.MainActivity;
 import com.pathteam.hikeitv2.Model.HikeList;
 import com.pathteam.hikeitv2.Model.hMarker;
@@ -89,6 +91,9 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
     @Bind(R.id.take_a_hike)
     Button takeHike;
 
+    @Bind(R.id.saved_image_view)
+    ImageView savedImage;
+
     public HikeDetailView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
@@ -112,6 +117,7 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
         title.setText(hike.getTitle());
         date.setText(hike.hmarker.get(0).getDate().toString());
         hikeNotes.setText(hike.getHikeNotes());
+        savedImage.setImageBitmap(Utils.decodeImage(hike.getImageString()));
 
         //Resets i to 0 everytime screen inflates, in order to help select first marker for poly line
         i = 0;
