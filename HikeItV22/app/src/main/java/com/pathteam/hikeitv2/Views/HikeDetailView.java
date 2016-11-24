@@ -4,13 +4,13 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.pathteam.hikeitv2.Components.Utils;
 import com.pathteam.hikeitv2.MainActivity;
 import com.pathteam.hikeitv2.Model.HikeList;
 import com.pathteam.hikeitv2.Model.hMarker;
@@ -50,14 +51,8 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
     private GoogleMap mMap;
     public LatLng Home;
-    private double lat = 0;
-    private double lng = 0;
     public String name;
     public String id;
-    Location oldLocation = new Location("none");
-    Location newLocation = new Location("newLocation");
-    float distance = 0;
-    float totalDis = 0;
     LatLng oldcoord;
 
 
@@ -89,6 +84,9 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
     @Bind(R.id.take_a_hike)
     Button takeHike;
 
+    @Bind(R.id.saved_image_view)
+    ImageView savedImage;
+
     public HikeDetailView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
@@ -112,6 +110,7 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
         title.setText(hike.getTitle());
         date.setText(hike.hmarker.get(0).getDate().toString());
         hikeNotes.setText(hike.getHikeNotes());
+        savedImage.setImageBitmap(Utils.decodeImage(hike.getImageString()));
 
         //Resets i to 0 everytime screen inflates, in order to help select first marker for poly line
         i = 0;
@@ -163,7 +162,7 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
             // Determines first marker of the Marker Array
             if (oldcoord != null){
-
+//                draws the poly lines
                 mMap.addPolyline((new PolylineOptions())
                         .add(Home, oldcoord)
                         .color(Color.RED)
@@ -171,7 +170,7 @@ public class HikeDetailView extends RelativeLayout implements OnMapReadyCallback
 
             i++;
             }
-//            oldcoord = marker.getMarkerPos();
+
             oldcoord=Home;
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Home, 14));
