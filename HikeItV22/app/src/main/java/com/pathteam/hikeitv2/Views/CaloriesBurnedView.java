@@ -25,8 +25,8 @@ import flow.History;
 public class CaloriesBurnedView extends RelativeLayout {
     Double MET;
     Double totalCaloriesBurned;
-    Integer totalTimeInHours;
-    Integer totalTimeInMinutes;
+    Integer totalTimeInHours=0;
+    Integer totalTimeInMinutes=0;
     Double totalWeight;
 
     @Bind(R.id.selectedWeight)
@@ -76,22 +76,19 @@ public class CaloriesBurnedView extends RelativeLayout {
         if (intenseButton.isChecked()) {
             MET = 5.3;
         }
+
         String timeInMinutes = selectedMinutes.getText().toString();
-        try {
+        if(timeInMinutes.isEmpty()){
+            totalTimeInMinutes = 0;
+        } else {
             totalTimeInMinutes = Integer.parseInt(timeInMinutes);
-        } catch(NumberFormatException ex) {
-            if (selectedMinutes == null) {
-                totalTimeInMinutes = 0;
-            }
         }
 
         String timeInHours = selectedHours.getText().toString();
-        try {
+        if(timeInHours.isEmpty()){
+            totalTimeInHours = 0;
+        } else {
             totalTimeInHours = Integer.parseInt(timeInHours);
-        } catch(NumberFormatException ex) {
-            if (selectedHours == null) {
-                totalTimeInHours = 0;
-            }
         }
 
         String weight = selectedWeight.getText().toString();

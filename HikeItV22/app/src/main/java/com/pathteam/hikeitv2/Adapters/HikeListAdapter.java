@@ -59,7 +59,7 @@ public class HikeListAdapter extends RecyclerView.Adapter<HikeListAdapter.HikeHo
     public int getItemCount() {
         return hikelist.size();
     }
-
+// Class binds the information to the hike item in the list view
     class HikeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @Bind(R.id.hike_notes)
@@ -84,7 +84,7 @@ public class HikeListAdapter extends RecyclerView.Adapter<HikeListAdapter.HikeHo
             date.setText(hikes.hmarker.get(0).getDate().toString());
         }
 
-        //On Click for List Hike View items
+        //On Click for List Hike View items pushed the view over to the detail view
         @Override
         public void onClick(View v) {
             position = getAdapterPosition();
