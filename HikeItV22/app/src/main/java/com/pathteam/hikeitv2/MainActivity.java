@@ -49,6 +49,9 @@ import flow.History;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
+
     public static Integer position;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
@@ -142,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},1);
             }
         }
+
+
 
     }
 

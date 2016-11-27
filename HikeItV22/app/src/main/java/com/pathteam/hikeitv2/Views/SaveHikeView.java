@@ -1,12 +1,14 @@
 package com.pathteam.hikeitv2.Views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.pathteam.hikeitv2.Components.Constants;
 import com.pathteam.hikeitv2.Components.Utils;
@@ -16,7 +18,9 @@ import com.pathteam.hikeitv2.Model.HikeList;
 import com.pathteam.hikeitv2.R;
 import com.pathteam.hikeitv2.Stages.MainMenuStage;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -53,6 +57,14 @@ public class SaveHikeView extends RelativeLayout {
 
 
 
+
+    // formats date to just hours and min.
+    java.util.Date date = new java.util.Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+
+
+
     public SaveHikeView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
@@ -61,18 +73,16 @@ public class SaveHikeView extends RelativeLayout {
 
     @Override
     protected void onFinishInflate() {
-
-
-
         super.onFinishInflate();
         ButterKnife.bind(this);
        // EventBus.getDefault().register(this);
 
-        for (int x = 0; x < Constants.markersArray.size(); x++) {
-            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getMarkerId().toString());
-            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getDate().toString());
-            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getMarkerPos().toString());
-        }
+//        for (int x = 0; x < Constants.markersArray.size(); x++) {
+//            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getMarkerId().toString());
+//            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getDate().toString());
+//            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getMarkerPos().toString());
+//        }
+
 
     }
 
@@ -89,10 +99,38 @@ public class SaveHikeView extends RelativeLayout {
     }
     @OnClick(R.id.saveButton)
     public void save() {
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.camera);
+        Date startDate = Constants.markersArray.get(0).getDate();
+        int i = Constants.markersArray.size()-1;
+        Date endDate = Constants.markersArray.get(i).getDate();
+        String time = "";
+        try {
+          Date  d1 = startDate;
+            Date d2 = endDate;
+
+            //in milliseconds
+            long diff = d2.getTime() - d1.getTime();
+
+            long diffSeconds = diff / 1000 % 60;
+            long diffMinutes = diff / (60 * 1000) % 60;
+            long diffHours = diff / (60 * 60 * 1000) % 24;
+            long diffDays = diff / (24 * 60 * 60 * 1000);
+
+            time = "Duration: "+ String.valueOf(diffHours)+":"+String.valueOf(diffMinutes)+":"+String.valueOf(diffSeconds);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         EditText title   = (EditText)findViewById(R.id.hike_title);
         EditText note   = (EditText)findViewById(R.id.hike_notes);
-        ((MainActivity) getContext()).hikelist.add(new HikeList(title.getText().toString() +"\n"+ "Distance: "+Constants.distance, Constants.markersArray,note.getText().toString(),Utils.encodeTobase64(Constants.me)));
+        try {
+            ((MainActivity) getContext()).hikelist.add(new HikeList(title.getText().toString() + "\n" + "Distance: " + Constants.distance + "\n" + time, Constants.markersArray, note.getText().toString(), Utils.encodeTobase64(Constants.me)));
+        } catch (Exception e) {
+            ((MainActivity) getContext()).hikelist.add(new HikeList(title.getText().toString() + "\n" + "Distance: " + Constants.distance + "\n" + time, Constants.markersArray, note.getText().toString(), Utils.encodeTobase64(bitmap)));
+            Toast.makeText(context, "You Did Not Choose an Image!", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
         ((MainActivity) getContext()).writeHikes();
             Flow flow = HikeApplication.getMainFlow();
         flow.setHistory(History.single(new MainMenuStage()),

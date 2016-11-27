@@ -226,7 +226,7 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
     //StopButton
     @OnClick(R.id.stop_button)
     public void saveHike() {
-        z++;
+        z=z + 1;
 
         handler.removeCallbacks(r);
         Constants.markersArray=markers;
