@@ -75,14 +75,6 @@ public class SaveHikeView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.bind(this);
-       // EventBus.getDefault().register(this);
-
-//        for (int x = 0; x < Constants.markersArray.size(); x++) {
-//            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getMarkerId().toString());
-//            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getDate().toString());
-//            Log.i("@@ARRAY@@: ", Constants.markersArray.get(x).getMarkerPos().toString());
-//        }
-
 
     }
 
