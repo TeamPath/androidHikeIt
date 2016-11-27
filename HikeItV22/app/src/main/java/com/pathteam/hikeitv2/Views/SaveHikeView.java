@@ -92,7 +92,7 @@ public class SaveHikeView extends RelativeLayout {
 
         EditText title   = (EditText)findViewById(R.id.hike_title);
         EditText note   = (EditText)findViewById(R.id.hike_notes);
-        ((MainActivity) getContext()).hikelist.add(new HikeList(title.getText().toString(), Constants.markersArray,note.getText().toString(),Utils.encodeTobase64(Constants.me)));
+        ((MainActivity) getContext()).hikelist.add(new HikeList(title.getText().toString() +"\n"+ "Distance: "+Constants.distance, Constants.markersArray,note.getText().toString(),Utils.encodeTobase64(Constants.me)));
         ((MainActivity) getContext()).writeHikes();
             Flow flow = HikeApplication.getMainFlow();
         flow.setHistory(History.single(new MainMenuStage()),

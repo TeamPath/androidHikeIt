@@ -18,6 +18,7 @@ public final class Constants {
     public static  String  IMAGE = "";
     public static Bitmap me;
     public static ArrayList<hMarker> markersArray;
+    public static String distance = "";
 
 
 }

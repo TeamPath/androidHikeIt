@@ -205,6 +205,7 @@ public class MapsView extends RelativeLayout implements OnMapReadyCallback,
                     value = Double.parseDouble(trip);
                     value = Math.round(totalDis * 1000.0) / 1000.0;
                     Log.d("*******", String.valueOf(value));
+                    Constants.distance= String.valueOf(value)+ "Mi.";
                 }
             }
         }
