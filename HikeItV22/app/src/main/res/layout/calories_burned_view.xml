@@ -21,7 +21,7 @@
         android:layout_marginBottom="70dp"
         android:layout_marginTop="25dp"
         android:ems="10"
-        android:hint="Current Weight(in pounds)"
+        android:hint="Current Weight (in lbs)"
         android:inputType="number" />
     <TextView
         android:id="@+id/displayCaloriesBurned"
@@ -53,13 +53,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Moderate"
-            android:layout_marginStart="50dp"/>
+            android:layout_marginStart="30dp"/>
         <RadioButton
             android:id="@+id/intenseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Difficult"
-            android:layout_marginStart="50dp"/>
+            android:layout_marginStart="30dp"/>
     </RadioGroup>
 
     <TextView
@@ -72,17 +72,6 @@
         android:id="@+id/selectDifficulty"
         android:textStyle="bold"
         android:textSize="18sp"/>
-
-    <Button
-        android:text="Get More Info"
-        android:textSize="12sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/getDetailsButton"
-        android:layout_alignBaseline="@+id/selectDifficulty"
-        android:layout_alignBottom="@+id/selectDifficulty"
-        android:layout_toEndOf="@+id/selectDifficulty"
-        style="@style/Widget.AppCompat.Button.Borderless" />
 
     <EditText
         android:hint="minutes"
@@ -113,6 +102,16 @@
         android:layout_marginBottom="10dp"
         android:layout_above="@+id/selectedMinutes"
         android:id="@+id/textView" />
+
+    <Button
+        android:text="Get More Info"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/getDetailsButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_above="@+id/displayCaloriesBurned"
+        android:layout_centerHorizontal="true" />
 
 
 </com.pathteam.hikeitv2.Views.CaloriesBurnedView>
