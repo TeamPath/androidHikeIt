@@ -14,8 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAlignment="center"
+            android:lineSpacingExtra="4dp"
         android:textSize="18sp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="30dp"
         android:text="Hiking is not the same on every trail. Different trails have different difficulties and thus require different levels of effort from the body to navigate them. Roughly knowing this difficulty will allow the app to more accurately calculate how many calories you burned on your hike."/>
 
     <TextView
