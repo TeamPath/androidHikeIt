@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 
 import com.pathteam.hikeitv2.HikeApplication;
 import com.pathteam.hikeitv2.R;
-import com.pathteam.hikeitv2.Stages.CaloriesBurnedStage;
+import com.pathteam.hikeitv2.Stages.HikeItMapStage;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,7 +21,7 @@ import flow.History;
 
 public class DifficultyDetailsView extends LinearLayout {
 
-    @Bind(R.id.confirm_button)
+    @Bind(R.id.got_it_button)
     Button confirmButton;
     public DifficultyDetailsView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -34,12 +34,13 @@ public class DifficultyDetailsView extends LinearLayout {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.confirm_button)
-    public void goBackwards(){
+    @OnClick(R.id.got_it_button)
+    public void goBack(){
         Flow flow = HikeApplication.getMainFlow();
         History newHistory = flow.getHistory().buildUpon()
-                .push(new CaloriesBurnedStage())
+                .push(new HikeItMapStage())
                 .build();
-        flow.setHistory(newHistory, Flow.Direction.FORWARD);
-        }
+        flow.setHistory(newHistory, Flow.Direction.REPLACE);
+
+    }
     }

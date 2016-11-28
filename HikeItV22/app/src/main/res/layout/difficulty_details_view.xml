@@ -72,6 +72,6 @@
         android:text="Got it!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/confirm_button"
+        android:id="@+id/got_it_button"
         android:layout_marginTop="50dp"/>
 </LinearLayout>
