@@ -2,10 +2,11 @@ package com.pathteam.hikeitv2.Views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pathteam.hikeitv2.HikeApplication;
@@ -22,7 +23,9 @@ import flow.History;
  * Created by JoshuaMabry on 11/18/16.
  */
 
-public class CaloriesBurnedView extends RelativeLayout {
+public class CaloriesBurnedView extends LinearLayout {
+
+    private Context context;
     Double MET;
     Double totalCaloriesBurned;
     Integer totalTimeInHours=0;
@@ -58,6 +61,7 @@ public class CaloriesBurnedView extends RelativeLayout {
 
     public CaloriesBurnedView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
 
     @Override
@@ -67,6 +71,13 @@ public class CaloriesBurnedView extends RelativeLayout {
     }
 
     private Double calculateCaloriesBurned() {
+
+        InputMethodManager imm = (InputMethodManager)context
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(selectedWeight.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(selectedHours.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(selectedMinutes.getWindowToken(), 0);
+
         if (lightButton.isChecked()) {
             MET = 2.3;
         }

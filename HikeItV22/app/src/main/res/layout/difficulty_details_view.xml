@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" android:background="@color/colorAccentGray">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="15dp">
+
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAlignment="center"
         android:textSize="18sp"
+            android:layout_marginBottom="40dp"
         android:text="Hiking is not the same on every trail. Different trails have different difficulties and thus require different levels of effort from the body to navigate them. Roughly knowing this difficulty will allow the app to more accurately calculate how many calories you burned on your hike."/>
 
     <TextView
@@ -68,10 +75,21 @@
         android:textAlignment="center"
         android:textSize="15sp"/>
 
-    <Button
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+            <Button
         android:text="Got it!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:id="@+id/confirm_button"
-        android:layout_marginTop="50dp"/>
+                android:visibility="invisible"
+        />
+
+    </RelativeLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

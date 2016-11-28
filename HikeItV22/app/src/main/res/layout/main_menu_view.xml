@@ -70,15 +70,6 @@
         android:id="@+id/my_stats"
         android:textAlignment="center"
         android:clickable="true"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:id="@+id/imageView2"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="67dp" />
     </LinearLayout>
 
 

@@ -14,7 +14,7 @@ import com.pathteam.hikeitv2.Riggers.SlideRigger;
 public class DifficultyDetailsStage extends IndexedStage {
     private final SlideRigger rigger;
     public DifficultyDetailsStage(Application context){
-        super(DifficultyDetailsStage.class.getName());
+        super(CaloriesBurnedStage.class.getName());
         this.rigger = new SlideRigger(context);
     }
     public DifficultyDetailsStage(){

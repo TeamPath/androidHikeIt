@@ -21,11 +21,14 @@ import flow.History;
 
 public class DifficultyDetailsView extends LinearLayout {
 
+    public Context context;
+
     @Bind(R.id.confirm_button)
     Button confirmButton;
+
     public DifficultyDetailsView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
+        this.context = context;
     }
 
     @Override
@@ -37,9 +40,7 @@ public class DifficultyDetailsView extends LinearLayout {
     @OnClick(R.id.confirm_button)
     public void goBackwards(){
         Flow flow = HikeApplication.getMainFlow();
-        History newHistory = flow.getHistory().buildUpon()
-                .push(new CaloriesBurnedStage())
-                .build();
-        flow.setHistory(newHistory, Flow.Direction.FORWARD);
+        flow.setHistory(History.single(new CaloriesBurnedStage()),
+                Flow.Direction.FORWARD);
         }
     }

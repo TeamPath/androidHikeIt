@@ -2,117 +2,156 @@
 <com.pathteam.hikeitv2.Views.CaloriesBurnedView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccentGray"
     android:orientation="vertical">
-    <Button
-        android:id="@+id/calculateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="67dp"
-        android:layout_marginEnd="45dp"
-        android:text="Calculate" />
-    <EditText
-        android:id="@+id/selectedWeight"
-        android:textStyle=""
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="70dp"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="Current Weight(in pounds)"
-        android:inputType="number" />
-    <TextView
-        android:id="@+id/displayCaloriesBurned"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/calculateButton"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="50dp"
-        android:layout_centerHorizontal="true"
-        android:textSize="30sp" />
 
-    <RadioGroup
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/radioGroup"
-        android:layout_above="@+id/displayCaloriesBurned"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="60dp">
-        <RadioButton
-            android:id="@+id/lightButton"
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:textAlignment="center"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+
+            <com.pathteam.hikeitv2.CustomFonts.MyCustomTextViewRubiksBlack
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CALORIES BURNED"
+                android:textSize="30dp"
+                android:layout_marginBottom="30dp"
+                android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Light"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="20dp"/>
-        <RadioButton
-            android:id="@+id/moderateButton"
-            android:layout_width="wrap_content"
+            android:text="Current Weight"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:id="@+id/current_weight"/>
+
+        <EditText
+            android:id="@+id/selectedWeight"
+            android:textStyle=""
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Moderate"
-            android:layout_marginStart="50dp"/>
-        <RadioButton
-            android:id="@+id/intenseButton"
-            android:layout_width="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:textAlignment="center"
+            android:textSize="15dp"
+            android:hint="Current Weight (in pounds)"
+            android:inputType="number" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="How Long Was Your Hike?"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:id="@+id/textView" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="25dp">
+
+
+                <EditText
+                    android:hint="hours"
+                    android:inputType="number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textAlignment="center"
+                    android:id="@+id/selectedHours"
+                    android:layout_weight=".50"/>
+                <EditText
+                    android:hint="minutes"
+                    android:inputType="number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textAlignment="center"
+                    android:layout_weight=".50"
+                    android:id="@+id/selectedMinutes" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:text="Select Hike Difficulty :"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:id="@+id/selectDifficulty"
+                android:textStyle="bold"
+                android:textSize="25dp"/>
+
+            <Button
+                android:text="Get More Info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:id="@+id/getDetailsButton"
+                style="@style/Widget.AppCompat.Button.Borderless" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/radioGroup"
+                android:layout_above="@+id/displayCaloriesBurned"
+                android:layout_alignParentEnd="true">
+
+                <RadioButton
+                    android:id="@+id/lightButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".333"
+                    android:text="Light"
+
+                    android:layout_marginStart="20dp"/>
+                <RadioButton
+                    android:id="@+id/moderateButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".333"
+                    android:text="Moderate"
+                    />
+                <RadioButton
+                    android:id="@+id/intenseButton"
+                    android:layout_width="wrap_content"
+                    android:layout_weight=".333"
+                    android:layout_height="wrap_content"
+                    android:text="Difficult"
+                    />
+            </RadioGroup>
+
+        <TextView
+            android:id="@+id/displayCaloriesBurned"
+            android:hint="Calulated Weight"
+            android:layout_width="match_parent"
+            android:layout_height="131dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_above="@+id/calculateButton"
+            android:textSize="35dp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/calculateButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Difficult"
-            android:layout_marginStart="50dp"/>
-    </RadioGroup>
+            android:layout_alignParentBottom="true"
+            android:text="Calculate" />
 
-    <TextView
-        android:text="Select HIke Difficulty :"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/radioGroup"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="26dp"
-        android:id="@+id/selectDifficulty"
-        android:textStyle="bold"
-        android:textSize="18sp"/>
-
-    <Button
-        android:text="Get More Info"
-        android:textSize="12sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/getDetailsButton"
-        android:layout_alignBaseline="@+id/selectDifficulty"
-        android:layout_alignBottom="@+id/selectDifficulty"
-        android:layout_toEndOf="@+id/selectDifficulty"
-        style="@style/Widget.AppCompat.Button.Borderless" />
-
-    <EditText
-        android:hint="minutes"
-        android:inputType="number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/selectedHours"
-        android:layout_alignBottom="@+id/selectedHours"
-        android:layout_alignEnd="@+id/selectedWeight"
-        android:id="@+id/selectedMinutes" />
-
-    <EditText
-        android:hint="hours"
-        android:inputType="number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/selectedHours"
-        android:layout_below="@+id/selectedWeight"
-        android:layout_alignStart="@+id/selectedWeight" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="How Long Was Your Hike?"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:textSize="18sp"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@+id/selectedMinutes"
-        android:id="@+id/textView" />
-
+    </RelativeLayout>
 
 </com.pathteam.hikeitv2.Views.CaloriesBurnedView>
