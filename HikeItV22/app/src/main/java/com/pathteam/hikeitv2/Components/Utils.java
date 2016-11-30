@@ -15,6 +15,7 @@ public class Utils {
 
 
     public static Bitmap resize(Bitmap image) {
+        //if (image.getWidth()> 200){}
             image = Bitmap.createScaledBitmap(image, 200, 150, false);
         return image;
     }
